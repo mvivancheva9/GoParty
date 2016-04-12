@@ -1,40 +1,13 @@
 package com.example.admin.goparty.models;
 
-/**
- * Created by Admin on 4/11/2016.
- */
 public class RegisterData {
-    private String email;
-    private String password;
-    private String confirmPassword;
+    final String email;
+    final String password;
+    final String confirmPassword;
 
     public RegisterData(String email, String password, String confirmPassword) {
         this.email = email;
         this.password = password;
-        this.confirmPassword = confirmPassword;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
-
-    public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
     }
 }

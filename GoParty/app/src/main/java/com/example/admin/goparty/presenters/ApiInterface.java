@@ -1,6 +1,8 @@
 package com.example.admin.goparty.presenters;
 
+import com.example.admin.goparty.models.Party;
 import com.example.admin.goparty.models.RegisterData;
+import com.example.admin.goparty.models.ResponsePartyListModel;
 
 import retrofit.Call;
 import retrofit.http.Body;
@@ -12,5 +14,5 @@ public interface ApiInterface {
     Call<HttpBinResponse> addUser(@Body RegisterData registerData);
 
     @GET("/api/Parties")
-    Call<HttpBinResponse> getParties();
+    Call<ResponsePartyListModel> getParties();
 }

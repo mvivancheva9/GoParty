@@ -1,17 +1,18 @@
 package com.example.admin.goparty.presenters;
 
+import com.example.admin.goparty.models.Party;
 import com.example.admin.goparty.models.RegisterData;
+import com.example.admin.goparty.models.ResponsePartyListModel;
 import com.example.admin.goparty.models.User;
 
-import retrofit.GsonConverterFactory;
-import retrofit.Retrofit;
 import retrofit.Call;
 import retrofit.Callback;
+import retrofit.GsonConverterFactory;
 import retrofit.Response;
+import retrofit.Retrofit;
 
-public class RegisterPresenter {
-
-    public void registrationProcessWithRetrofit(User user){
+public class PartyPresenter {
+    public void GetAllParties(){
 
         String url = "http://goparty.azurewebsites.net";
 
@@ -22,16 +23,13 @@ public class RegisterPresenter {
 
         ApiInterface service = retrofit.create(ApiInterface.class);
 
-        RegisterData registerData = new RegisterData(user.getUsername(), user.getPassword(), user.getPassword());
-        Call<HttpBinResponse> call = service.addUser(registerData);
+        Call<ResponsePartyListModel> call = service.getParties();
 
-        call.enqueue(new Callback<HttpBinResponse>() {
+        call.enqueue(new Callback<ResponsePartyListModel>() {
             @Override
-            public void onResponse(Response<HttpBinResponse> response) {
+            public void onResponse(Response<ResponsePartyListModel> response) {
                 int code = response.code();
                 System.out.println("Response status code: " + response.code());
-
-                HttpBinResponse decodedResponse = response.body();
 
             }
 

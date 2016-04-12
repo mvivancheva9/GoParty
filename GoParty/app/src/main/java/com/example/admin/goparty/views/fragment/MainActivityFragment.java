@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.admin.goparty.R;
 import com.example.admin.goparty.models.User;
+import com.example.admin.goparty.presenters.PartyPresenter;
 import com.example.admin.goparty.presenters.RegisterPresenter;
 
 import butterknife.Bind;
@@ -67,6 +68,9 @@ public class MainActivityFragment extends Fragment {
             case R.id.btn_login:
                 CharSequence text = "Login!";
                 int duration = Toast.LENGTH_SHORT;
+
+                PartyPresenter partyPresenter = new PartyPresenter();
+                partyPresenter.GetAllParties();
 
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();

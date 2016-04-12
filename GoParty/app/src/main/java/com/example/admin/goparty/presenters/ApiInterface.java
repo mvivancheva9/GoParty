@@ -7,6 +7,8 @@ import com.example.admin.goparty.models.RequestRegisterUserModel;
 import com.example.admin.goparty.models.ResponsePartyListModel;
 import com.google.gson.JsonObject;
 
+import java.util.List;
+
 import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.Field;
@@ -30,7 +32,7 @@ public interface ApiInterface {
             @Field("userName") String userName);
 
     @GET("/api/Parties")
-    Call<ResponsePartyListModel> getParties();
+    Call<List<Party>> getParties();
 
     @POST("/api/Parties")
     Call<Party> addParty(@Body PartyRequestModel partyRequestModel);

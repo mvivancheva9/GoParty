@@ -84,7 +84,7 @@ public class MainActivityFragment extends Fragment {
 
                 user = new User(inputUsername.getText().toString(), inputPassword.getText().toString(),inputUsername.getText().toString());
                 //rp.registerUser(user);
-                partyPresenter.addParty(this.getContext());
+                partyPresenter.GetAllParties();
 
                 toast = Toast.makeText(context, text, duration);
                 toast.show();

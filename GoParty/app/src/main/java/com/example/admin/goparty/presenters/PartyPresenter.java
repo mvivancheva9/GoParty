@@ -30,21 +30,29 @@ public class PartyPresenter {
 
     public void GetAllParties(){
 
-//        Call<ResponsePartyListModel> call = service.getParties();
-//
-//        call.enqueue(new Callback<ResponsePartyListModel>() {
-//            @Override
-//            public void onResponse(Response<ResponsePartyListModel> response) {
-//                int code = response.code();
-//                System.out.println("Response status code: " + response.code());
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Throwable t) {
-//                System.out.println(t.getMessage());
-//            }
-//        });
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(url)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ApiInterface service = retrofit.create(ApiInterface.class);
+
+        Call<List<Party>> call = service.getParties();
+
+        call.enqueue(new Callback<List<Party>>() {
+            @Override
+            public void onResponse(Response<List<Party>> response) {
+                int code = response.code();
+                System.out.println("Response status code: " + response.code());
+
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                System.out.println(t.getMessage());
+            }
+        });
     }
 
     public void addParty(Context context){

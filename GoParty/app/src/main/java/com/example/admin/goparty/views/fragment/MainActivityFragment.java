@@ -16,7 +16,7 @@ import android.widget.Toast;
 import com.example.admin.goparty.R;
 import com.example.admin.goparty.models.User;
 import com.example.admin.goparty.presenters.PartyPresenter;
-import com.example.admin.goparty.presenters.RegisterPresenter;
+import com.example.admin.goparty.presenters.UserPresenter;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -69,18 +69,16 @@ public class MainActivityFragment extends Fragment {
                 CharSequence text = "Login!";
                 int duration = Toast.LENGTH_SHORT;
 
-                PartyPresenter partyPresenter = new PartyPresenter();
-                partyPresenter.GetAllParties();
+                User user = new User(inputUsername.getText().toString(), inputPassword.getText().toString(),inputUsername.getText().toString());
+                UserPresenter rp = new UserPresenter();
+
+                rp.loginUser(user);
 
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
                 break;
             case R.id.link_forgotten_password:
                 text = inputUsername.getText() + " registered";
-
-                User user = new User(inputUsername.getText().toString(), inputPassword.getText().toString(),inputUsername.getText().toString());
-                RegisterPresenter rp = new RegisterPresenter();
-                rp.registrationProcessWithRetrofit(user);
 
                 duration = Toast.LENGTH_SHORT;
 

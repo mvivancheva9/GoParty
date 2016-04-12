@@ -1,9 +1,6 @@
 package com.example.admin.goparty.presenters;
 
-import com.example.admin.goparty.models.Party;
-import com.example.admin.goparty.models.RegisterData;
 import com.example.admin.goparty.models.ResponsePartyListModel;
-import com.example.admin.goparty.models.User;
 
 import retrofit.Call;
 import retrofit.Callback;

@@ -29,4 +29,12 @@
         <item name="android:padding">12dp</item>
     </style>
 
+    <style name="ButtonAddParty">
+        <item name="android:background">@drawable/round_button</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">10dp</item>
+    </style>
+
 </resources>

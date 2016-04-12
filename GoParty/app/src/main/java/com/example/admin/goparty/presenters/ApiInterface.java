@@ -17,6 +17,7 @@ import retrofit.http.GET;
 import retrofit.http.Header;
 import retrofit.http.Headers;
 import retrofit.http.POST;
+import retrofit.http.Path;
 
 public interface ApiInterface {
 
@@ -36,4 +37,7 @@ public interface ApiInterface {
 
     @POST("/api/Parties")
     Call<Party> addParty(@Body PartyRequestModel partyRequestModel);
+
+    @GET("/api/Parties/Party/{id}")
+    Call<Party> getParty(@Path("id") int id);
 }

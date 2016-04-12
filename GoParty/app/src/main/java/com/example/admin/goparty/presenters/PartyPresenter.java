@@ -1,10 +1,17 @@
 package com.example.admin.goparty.presenters;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.provider.MediaStore;
 
 import com.example.admin.goparty.data.SqLiteDbHelper;
 import com.example.admin.goparty.models.Party;
 import com.example.admin.goparty.models.PartyRequestModel;
+import com.example.admin.goparty.models.PartyResponseModel;
 import com.example.admin.goparty.models.ResponsePartyListModel;
 import com.example.admin.goparty.models.User;
 import com.squareup.okhttp.Interceptor;
@@ -12,7 +19,9 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.List;
+import java.util.UUID;
 
 import retrofit.Call;
 import retrofit.Callback;
@@ -55,7 +64,34 @@ public class PartyPresenter {
         });
     }
 
-    public void addParty(Context context){
+    public void getPartyById(int partyId){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(url)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ApiInterface service = retrofit.create(ApiInterface.class);
+
+        Call<Party> call = service.getParty(partyId);
+
+        call.enqueue(new Callback<Party>() {
+            @Override
+            public void onResponse(Response<Party> response) {
+                int code = response.code();
+                System.out.println("Response status code: " + response.code());
+
+
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+
+                System.out.println(t.getMessage());
+            }
+        });
+    }
+
+    public void addParty(final Context context, Party party){
         sqlDb = new SqLiteDbHelper(context);
 
         List<String> list = sqlDb.getAllUsers();
@@ -89,7 +125,7 @@ public class PartyPresenter {
 
         ApiInterface service = retrofit.create(ApiInterface.class);
 
-        PartyRequestModel partyRequestModel = new PartyRequestModel(1.23456, 1.23456, "dsds", 2233);
+        PartyRequestModel partyRequestModel = new PartyRequestModel(party.getLatitude(), party.getLongitude(), party.getTitle().toString(), party.getDuration());
         Call<Party> call = service.addParty(partyRequestModel);
 
         call.enqueue(new Callback<Party>() {
@@ -97,7 +133,9 @@ public class PartyPresenter {
             public void onResponse(Response<Party> response) {
                 int code = response.code();
                 System.out.println("Response status code: " + response.code());
+                PartyResponseModel party = new PartyResponseModel(response.body().getLatitude(), response.body().getLongitude(), response.body().getTitle().toString(), response.body().getDuration());
 
+                
             }
 
             @Override

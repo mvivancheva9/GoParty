@@ -1,5 +1,7 @@
 package com.example.admin.goparty.views.fragment;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
@@ -9,9 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.admin.goparty.R;
+import com.example.admin.goparty.models.Party;
 import com.example.admin.goparty.presenters.PartyPresenter;
+import com.example.admin.goparty.views.activity.MapsActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -31,7 +36,7 @@ public class AddPartyFragment extends Fragment {
     TextInputLayout durationContent;
     @Bind(R.id.btn_add_location)
     AppCompatButton btnAddLocation;
-    PartyPresenter partyPresenter = new PartyPresenter();
+    Context context;
 
     public AddPartyFragment() {
         // Required empty public constructor
@@ -49,6 +54,7 @@ public class AddPartyFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.add_party_fragment, container, false);
         ButterKnife.bind(this, view);
+        context = inflater.getContext();
         return view;
     }
 
@@ -60,6 +66,21 @@ public class AddPartyFragment extends Fragment {
 
     @OnClick(R.id.btn_add_location)
     public void onClick() {
-        partyPresenter.GetAllParties();
+
+        if(inputTitle.getText().toString().trim().isEmpty() || inputDuration.getText().toString().trim().isEmpty()){
+            CharSequence text = "Both fields are required";
+            int durationLength = Toast.LENGTH_SHORT;
+            Toast toast = Toast.makeText(context, text, durationLength);
+            toast.show();
+        }else{
+            String title = inputTitle.getText().toString();
+            Integer duration = Integer.parseInt(inputDuration.getText().toString());
+
+            Intent intent = new Intent(getActivity(), MapsActivity.class);
+            intent.putExtra("title", title);
+            intent.putExtra("duration", duration);
+            startActivity(intent);
+        }
+
     }
 }

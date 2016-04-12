@@ -1,5 +1,4 @@
 package com.example.admin.goparty.views.activity;
-
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -7,36 +6,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.admin.goparty.R;
-import com.example.admin.goparty.data.SqLiteDbHelper;
 
-import java.util.List;
-
-public class MainActivity extends AppCompatActivity {
-    private SqLiteDbHelper sqlDb;
-
+/**
+ * Created by Admin on 4/12/2016.
+ */
+public class PartyActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        sqlDb = new SqLiteDbHelper(this);
-
-        List<String> list = sqlDb.getAllUsers();
-
-        final String token = list.get(0);
-
-        if(token != null){
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.party_activity_main);
-            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-            setSupportActionBar(toolbar);
-        }
-        else {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_main);
-            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-            setSupportActionBar(toolbar);
-        }
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.party_activity_main);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

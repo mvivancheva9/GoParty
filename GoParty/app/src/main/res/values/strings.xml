@@ -6,4 +6,9 @@
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="register">REGISTER</string>
+
+    <string name="title">Title</string>
+    <string name="addLocation">Add Location</string>
+    <string name="addParty">Add Party</string>
+    <string name="duration">Duration</string>
 </resources>

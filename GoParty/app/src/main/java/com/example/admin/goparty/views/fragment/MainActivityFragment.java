@@ -44,6 +44,7 @@ public class MainActivityFragment extends Fragment {
     Context context;
     User user;
     UserPresenter rp = new UserPresenter();
+    PartyPresenter partyPresenter = new PartyPresenter();
 
     public MainActivityFragment() {
     }
@@ -83,7 +84,7 @@ public class MainActivityFragment extends Fragment {
 
                 user = new User(inputUsername.getText().toString(), inputPassword.getText().toString(),inputUsername.getText().toString());
                 //rp.registerUser(user);
-
+                partyPresenter.GetAllParties();
 
                 toast = Toast.makeText(context, text, duration);
                 toast.show();

@@ -42,6 +42,9 @@ public class MainActivityFragment extends Fragment {
     @Bind(R.id.link_forgotten_password)
     TextView linkForgottenPassword;
     Context context;
+    User user;
+    UserPresenter rp = new UserPresenter();
+    PartyPresenter partyPresenter = new PartyPresenter();
 
     public MainActivityFragment() {
     }
@@ -68,11 +71,8 @@ public class MainActivityFragment extends Fragment {
             case R.id.btn_login:
                 CharSequence text = "Login!";
                 int duration = Toast.LENGTH_SHORT;
-
-                User user = new User(inputUsername.getText().toString(), inputPassword.getText().toString(),inputUsername.getText().toString());
-                UserPresenter rp = new UserPresenter();
-
-                rp.loginUser(user);
+                user = new User(inputUsername.getText().toString(), inputPassword.getText().toString(),inputUsername.getText().toString());
+                rp.loginUser(user,this.getContext());
 
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
@@ -81,6 +81,10 @@ public class MainActivityFragment extends Fragment {
                 text = inputUsername.getText() + " registered";
 
                 duration = Toast.LENGTH_SHORT;
+
+                user = new User(inputUsername.getText().toString(), inputPassword.getText().toString(),inputUsername.getText().toString());
+                //rp.registerUser(user);
+                partyPresenter.addParty(this.getContext());
 
                 toast = Toast.makeText(context, text, duration);
                 toast.show();

@@ -38,7 +38,12 @@ public class ListDemoAdapter extends ArrayAdapter<Party> {
 
         // update the item view
         Party item = getItem(position);
-        viewHolder.tvTitle.setText(item.getTitle().toString());
+        if (item.getTitle() == null) {
+            viewHolder.tvTitle.setText("No Title");
+
+        }else{
+            viewHolder.tvTitle.setText(item.getTitle().toString());
+        }
 
         return convertView;
     }

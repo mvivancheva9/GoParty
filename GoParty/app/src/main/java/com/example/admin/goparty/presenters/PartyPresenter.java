@@ -1,11 +1,17 @@
 package com.example.admin.goparty.presenters;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Observable;
+import android.os.Parcelable;
+import android.support.v4.app.FragmentManager;
 
+import com.example.admin.goparty.R;
 import com.example.admin.goparty.data.SqLiteDbHelper;
 import com.example.admin.goparty.models.Party;
 import com.example.admin.goparty.models.PartyRequestModel;
 import com.example.admin.goparty.models.PartyResponseModel;
+import com.example.admin.goparty.views.activity.PartyActivity;
+import com.example.admin.goparty.views.fragment.PartyListFragment;
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -39,23 +45,12 @@ public class PartyPresenter {
 
         ApiInterface service = retrofit.create(ApiInterface.class);
 
-        Call<Observable<List<Party>>> call = service.getParties();
-
-        call.enqueue(new Callback<Observable<List<Party>>>() {
-
-            @Override
-            public void onResponse(Response<Observable<List<Party>>> response) {
-                int code = response.code();
-
-                parties = (List<Party>) response.body();
-                System.out.println("Response status code: " + response.code());
-            }
-
-            @Override
-            public void onFailure(Throwable t) {
-                System.out.println(t.getMessage());
-            }
-        });
+        Call<List<Party>> call = service.getParties();
+        try {
+            parties=call.execute().body();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return parties;
     }
 
@@ -139,5 +134,8 @@ public class PartyPresenter {
                 System.out.println(t.getMessage());
             }
         });
+    }
+    public List<Party> loadParties(){
+        return parties;
     }
 }

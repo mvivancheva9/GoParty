@@ -1,12 +1,15 @@
 package com.example.admin.goparty.views.fragment;
 
+import android.content.Context;
+import android.content.Intent;
+import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.os.SystemClock;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -15,11 +18,20 @@ import com.example.admin.goparty.models.Party;
 import com.example.admin.goparty.presenters.PartyPresenter;
 import com.example.admin.goparty.views.adapter.ListDemoAdapter;
 
+import org.json.JSONException;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class PartyListFragment extends ListFragment {
-    private ArrayList<Party> partyArrayList;
+    private List<Party> partyArrayList;
     private PartyPresenter partyPresenter;
+    private ListDemoAdapter listDemoAdapter;
+    Context context;
 
     public PartyListFragment(){
 
@@ -28,23 +40,27 @@ public class PartyListFragment extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        context = getActivity();
 
         partyPresenter = new PartyPresenter();
 
-//        Party party = new Party();
-//        party.setTitle("fdfd");
-//        party.setDuration(222);
-//        party.setLongitude(1.23);
-//        party.setLatitude(1.23);
-//
-//        partyArrayList = new ArrayList<Party>();
-//        partyArrayList.add(party);
-//        partyArrayList.add(party);
+        partyArrayList = new ArrayList<Party>();
 
-        partyArrayList = (ArrayList<Party>) partyPresenter.getAllParties();
+        getItemLists gfl = new getItemLists();
+        gfl.execute();
 
-        setListAdapter(new ListDemoAdapter(getActivity(), partyArrayList));
+        try {
+            partyArrayList = gfl.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        listDemoAdapter = new ListDemoAdapter(context, partyArrayList);
+        setListAdapter(listDemoAdapter);
     }
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -55,8 +71,47 @@ public class PartyListFragment extends ListFragment {
     public void onListItemClick(ListView l, View v, int position, long id) {
         // retrieve theListView item
         Party item = partyArrayList.get(position);
+        Location myAddress = new Location("location");
+        myAddress.setLatitude(item.getLatitude());
+        myAddress.setLongitude(item.getLongitude());
 
+        Calendar cal = Calendar.getInstance();
+        Intent intent = new Intent(Intent.ACTION_EDIT);
+        intent.setType("vnd.android.cursor.item/event");
+        intent.putExtra("beginTime", cal.getTimeInMillis());
+        intent.putExtra("allDay", false);
+        intent.putExtra("description", "Location here: " + myAddress.getLatitude() + " " + myAddress.getLongitude());
+        intent.putExtra("rrule", "FREQ=YEARLY");
+        intent.putExtra("endTime", cal.getTimeInMillis()+item.getDuration());
+        intent.putExtra("title", item.getTitle().toString());
+        startActivity(intent);
         // do something
         Toast.makeText(getActivity(), item.getTitle().toString(), Toast.LENGTH_SHORT).show();
+    }
+    private class getItemLists extends
+            AsyncTask<Void, String, ArrayList<Party>> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onProgressUpdate(String... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected ArrayList<Party> doInBackground(Void... params) {
+            ArrayList<Party> fal = (ArrayList<Party>) partyPresenter.getAllParties();
+            return fal;
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<Party> result) {
+            super.onPostExecute(result);
+            partyArrayList = result;
+
+
+        }
     }
 }

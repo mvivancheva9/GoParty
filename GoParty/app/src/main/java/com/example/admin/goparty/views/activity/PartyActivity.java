@@ -11,9 +11,13 @@ import android.widget.Toast;
 
 import com.example.admin.goparty.R;
 import com.example.admin.goparty.data.SqLiteDbHelper;
+import com.example.admin.goparty.models.Party;
 import com.example.admin.goparty.presenters.PartyPresenter;
 import com.example.admin.goparty.views.fragment.AddPartyFragment;
 import com.example.admin.goparty.views.fragment.PartyListFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Admin on 4/12/2016.
@@ -26,6 +30,7 @@ public class PartyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.party_activity_main);
+
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.party_content_main, new PartyListFragment())
@@ -54,16 +59,12 @@ public class PartyActivity extends AppCompatActivity {
             fragmentManager.beginTransaction()
                     .replace(R.id.party_content_main, new AddPartyFragment())
                     .commit();
-//            partyPresenter = new PartyPresenter();
-//            ArrayList<Party> = partyPresenter.GetAllParties();
             return true;
         }else if (id == R.id.action_list_all_parties) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
                     .replace(R.id.party_content_main, new PartyListFragment())
                     .commit();
-//            partyPresenter = new PartyPresenter();
-//            partyPresenter.GetAllParties();
             return true;
         }else if (id == R.id.action_logout) {
             sqlDb = new SqLiteDbHelper(this);

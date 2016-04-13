@@ -27,7 +27,7 @@ public class UserPresenter {
 
     ApiInterface service = retrofit.create(ApiInterface.class);
 
-    public void registerUser(User user){
+    public void registerUser(final User user, final Context context){
 
         RequestRegisterUserModel requestRegisterUserModel = new RequestRegisterUserModel(user.getEmail(), user.getPassword(), user.getPassword());
 
@@ -36,8 +36,8 @@ public class UserPresenter {
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Response<Void> response) {
-                String message = response.message();
 
+                loginUser(user, context);
             }
             @Override
             public void onFailure(Throwable caught) {
@@ -56,7 +56,7 @@ public class UserPresenter {
     public void loginUser(User user, Context context){
 
         sqlDb = new SqLiteDbHelper(context);
-        Call<LoginUserResponseModel> call = service.loginUser("aaa@abv.bg", "123456", "password", "aaa@abv.bg");
+        Call<LoginUserResponseModel> call = service.loginUser(user.getEmail(), user.getPassword(), "password", user.getEmail());
 
         call.enqueue(new Callback<LoginUserResponseModel>() {
             @Override

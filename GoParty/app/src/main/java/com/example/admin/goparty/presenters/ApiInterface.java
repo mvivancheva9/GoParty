@@ -35,7 +35,7 @@ public interface ApiInterface {
             @Field("userName") String userName);
 
     @GET("/api/Parties")
-    Call<Observable<List<Party>>> getParties();
+    Call<List<Party>> getParties();
 
     @POST("/api/Parties")
     Call<Party> addParty(@Body PartyRequestModel partyRequestModel);

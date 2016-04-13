@@ -90,10 +90,13 @@ public class MainActivityFragment extends Fragment {
 
                 user = new User(inputUsername.getText().toString(), inputPassword.getText().toString(),inputUsername.getText().toString());
 
-                rp.registerUser(user);
+                rp.registerUser(user, context);
 
                 toast = Toast.makeText(context, text, duration);
                 toast.show();
+
+                intent = new Intent(getActivity(), PartyActivity.class);
+                startActivity(intent);
                 break;
         }
     }

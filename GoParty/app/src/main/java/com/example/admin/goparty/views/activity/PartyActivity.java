@@ -1,6 +1,8 @@
 package com.example.admin.goparty.views.activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -10,6 +12,8 @@ import android.widget.Toast;
 import com.example.admin.goparty.R;
 import com.example.admin.goparty.data.SqLiteDbHelper;
 import com.example.admin.goparty.presenters.PartyPresenter;
+import com.example.admin.goparty.views.fragment.AddPartyFragment;
+import com.example.admin.goparty.views.fragment.PartyListFragment;
 
 /**
  * Created by Admin on 4/12/2016.
@@ -22,6 +26,10 @@ public class PartyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.party_activity_main);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.party_content_main, new PartyListFragment())
+                .commit();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
@@ -41,9 +49,21 @@ public class PartyActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_list_all_parties) {
-            partyPresenter = new PartyPresenter();
-            partyPresenter.GetAllParties();
+        if (id == R.id.action_add_party) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.party_content_main, new AddPartyFragment())
+                    .commit();
+//            partyPresenter = new PartyPresenter();
+//            ArrayList<Party> = partyPresenter.GetAllParties();
+            return true;
+        }else if (id == R.id.action_list_all_parties) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.party_content_main, new PartyListFragment())
+                    .commit();
+//            partyPresenter = new PartyPresenter();
+//            partyPresenter.GetAllParties();
             return true;
         }else if (id == R.id.action_logout) {
             sqlDb = new SqLiteDbHelper(this);

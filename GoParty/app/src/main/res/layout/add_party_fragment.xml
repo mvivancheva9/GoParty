@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:fitsSystemWindows="true"
-    android:background="#CCFFFFFF"
-    android:layout_margin="20dp">
-
-    <LinearLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:fitsSystemWindows="true"
+        android:background="#CCFFFFFF"
+        android:layout_margin="20dp"
         android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:paddingLeft="24dp"
-        android:paddingRight="24dp">
+        android:paddingRight="24dp"
+        android:id="@+id/add_party_view">
 
         <ImageView
             android:src="@drawable/logo"
             android:layout_width="wrap_content"
-            android:layout_height="250dp"
+            android:layout_height="200dp"
             android:layout_gravity="center_horizontal"
             android:id="@+id/logo_image"/>
 
@@ -62,4 +59,3 @@
             android:text="@string/addLocation"
             style="@style/Button"/>
     </LinearLayout>
-</ScrollView>

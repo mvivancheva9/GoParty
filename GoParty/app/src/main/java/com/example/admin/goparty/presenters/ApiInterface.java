@@ -1,5 +1,7 @@
 package com.example.admin.goparty.presenters;
 
+import android.database.Observable;
+
 import com.example.admin.goparty.models.LoginUserResponseModel;
 import com.example.admin.goparty.models.Party;
 import com.example.admin.goparty.models.PartyRequestModel;
@@ -33,7 +35,7 @@ public interface ApiInterface {
             @Field("userName") String userName);
 
     @GET("/api/Parties")
-    Call<List<Party>> getParties();
+    Call<Observable<List<Party>>> getParties();
 
     @POST("/api/Parties")
     Call<Party> addParty(@Body PartyRequestModel partyRequestModel);

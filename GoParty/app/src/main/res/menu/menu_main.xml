@@ -3,6 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".views.activity.PartyActivity">
     <item
+        android:id="@+id/action_add_party"
+        android:orderInCategory="100"
+        android:title="@string/addParty"/>
+    <item
         android:id="@+id/action_list_all_parties"
         android:orderInCategory="100"
         android:title="@string/all_parties"/>

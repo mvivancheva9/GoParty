@@ -1,5 +1,6 @@
 package com.example.admin.goparty.presenters;
 import android.content.Context;
+import android.database.Observable;
 
 import com.example.admin.goparty.data.SqLiteDbHelper;
 import com.example.admin.goparty.models.Party;
@@ -10,6 +11,7 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit.Call;
@@ -20,14 +22,14 @@ import retrofit.Retrofit;
 
 public class PartyPresenter {
 
-    static String url = "http://goparty.azurewebsites.net";
+    static String url = "http://goparty.apphb.com";
 
     private static okhttp3.OkHttpClient.Builder httpClient = new okhttp3.OkHttpClient.Builder();
     private SqLiteDbHelper sqlDb;
     OkHttpClient client = new OkHttpClient();
-    List<Party> parties;
+    List<Party> parties = new ArrayList<Party>();
 
-    public List<Party> GetAllParties(){
+    public List<Party> getAllParties(){
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(url)
@@ -37,14 +39,15 @@ public class PartyPresenter {
 
         ApiInterface service = retrofit.create(ApiInterface.class);
 
-        Call<List<Party>> call = service.getParties();
+        Call<Observable<List<Party>>> call = service.getParties();
 
-        call.enqueue(new Callback<List<Party>>() {
+        call.enqueue(new Callback<Observable<List<Party>>>() {
+
             @Override
-            public void onResponse(Response<List<Party>> response) {
+            public void onResponse(Response<Observable<List<Party>>> response) {
                 int code = response.code();
 
-                parties = response.body();
+                parties = (List<Party>) response.body();
                 System.out.println("Response status code: " + response.code());
             }
 

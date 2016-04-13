@@ -101,6 +101,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             party.setLatitude(tappedPoint.latitude);
             party.setLongitude(tappedPoint.longitude);
             partyPresenter.addParty(this, party);
+
+            CharSequence text = "Party Successfully added";
+            int duration = Toast.LENGTH_SHORT;
+            Toast toast = Toast.makeText(this, text, duration);
+
+            toast.show();
+            Intent intent = new Intent(this, PartyActivity.class);
+            startActivity(intent);
         }
         else{
 

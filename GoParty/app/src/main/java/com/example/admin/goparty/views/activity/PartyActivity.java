@@ -9,12 +9,14 @@ import android.widget.Toast;
 
 import com.example.admin.goparty.R;
 import com.example.admin.goparty.data.SqLiteDbHelper;
+import com.example.admin.goparty.presenters.PartyPresenter;
 
 /**
  * Created by Admin on 4/12/2016.
  */
 public class PartyActivity extends AppCompatActivity {
     private SqLiteDbHelper sqlDb;
+    PartyPresenter partyPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +42,8 @@ public class PartyActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_list_all_parties) {
-            CharSequence text = "Both fields are required";
-            int durationLength = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(this, text, durationLength);
-            toast.show();
+            partyPresenter = new PartyPresenter();
+            partyPresenter.GetAllParties();
             return true;
         }else if (id == R.id.action_logout) {
             sqlDb = new SqLiteDbHelper(this);

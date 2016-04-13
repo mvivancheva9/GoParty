@@ -1,29 +1,16 @@
 package com.example.admin.goparty.presenters;
-
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
-import android.provider.MediaStore;
 
-import com.example.admin.goparty.R;
 import com.example.admin.goparty.data.SqLiteDbHelper;
 import com.example.admin.goparty.models.Party;
 import com.example.admin.goparty.models.PartyRequestModel;
 import com.example.admin.goparty.models.PartyResponseModel;
-import com.example.admin.goparty.models.ResponsePartyListModel;
-import com.example.admin.goparty.models.User;
-import com.example.admin.goparty.views.fragment.PartyDetailsFragment;
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.List;
-import java.util.UUID;
 
 import retrofit.Call;
 import retrofit.Callback;
@@ -38,8 +25,9 @@ public class PartyPresenter {
     private static okhttp3.OkHttpClient.Builder httpClient = new okhttp3.OkHttpClient.Builder();
     private SqLiteDbHelper sqlDb;
     OkHttpClient client = new OkHttpClient();
+    List<Party> parties;
 
-    public void GetAllParties(){
+    public List<Party> GetAllParties(){
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(url)
@@ -55,8 +43,9 @@ public class PartyPresenter {
             @Override
             public void onResponse(Response<List<Party>> response) {
                 int code = response.code();
-                System.out.println("Response status code: " + response.code());
 
+                parties = response.body();
+                System.out.println("Response status code: " + response.code());
             }
 
             @Override
@@ -64,6 +53,7 @@ public class PartyPresenter {
                 System.out.println(t.getMessage());
             }
         });
+        return parties;
     }
 
     public void getPartyById(int partyId){

@@ -1,16 +1,21 @@
 package com.example.admin.goparty.views.activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.admin.goparty.R;
+import com.example.admin.goparty.data.SqLiteDbHelper;
 
 /**
  * Created by Admin on 4/12/2016.
  */
 public class PartyActivity extends AppCompatActivity {
+    private SqLiteDbHelper sqlDb;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +39,18 @@ public class PartyActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_list_all_parties) {
+            CharSequence text = "Both fields are required";
+            int durationLength = Toast.LENGTH_SHORT;
+            Toast toast = Toast.makeText(this, text, durationLength);
+            toast.show();
+            return true;
+        }else if (id == R.id.action_logout) {
+            sqlDb = new SqLiteDbHelper(this);
+            sqlDb.deleteContact();
+
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
             return true;
         }
 

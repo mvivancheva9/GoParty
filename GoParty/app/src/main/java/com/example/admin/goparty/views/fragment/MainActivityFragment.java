@@ -72,7 +72,7 @@ public class MainActivityFragment extends Fragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_login:
-                CharSequence text = "Login!";
+                CharSequence text = "User Successfully Logged In!";
                 int duration = Toast.LENGTH_SHORT;
                 user = new User(inputUsername.getText().toString(), inputPassword.getText().toString(),inputUsername.getText().toString());
                 rp.loginUser(user,this.getContext());
@@ -89,8 +89,8 @@ public class MainActivityFragment extends Fragment {
                 duration = Toast.LENGTH_SHORT;
 
                 user = new User(inputUsername.getText().toString(), inputPassword.getText().toString(),inputUsername.getText().toString());
-                //rp.registerUser(user);
-                partyPresenter.GetAllParties();
+
+                rp.registerUser(user);
 
                 toast = Toast.makeText(context, text, duration);
                 toast.show();

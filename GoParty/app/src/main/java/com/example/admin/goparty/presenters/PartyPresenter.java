@@ -8,12 +8,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 
+import com.example.admin.goparty.R;
 import com.example.admin.goparty.data.SqLiteDbHelper;
 import com.example.admin.goparty.models.Party;
 import com.example.admin.goparty.models.PartyRequestModel;
 import com.example.admin.goparty.models.PartyResponseModel;
 import com.example.admin.goparty.models.ResponsePartyListModel;
 import com.example.admin.goparty.models.User;
+import com.example.admin.goparty.views.fragment.PartyDetailsFragment;
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -135,7 +137,7 @@ public class PartyPresenter {
                 System.out.println("Response status code: " + response.code());
                 PartyResponseModel party = new PartyResponseModel(response.body().getLatitude(), response.body().getLongitude(), response.body().getTitle().toString(), response.body().getDuration());
 
-                
+                //TODO -> partyDetails
             }
 
             @Override

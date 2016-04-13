@@ -1,6 +1,7 @@
 package com.example.admin.goparty.views.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
@@ -17,6 +18,8 @@ import com.example.admin.goparty.R;
 import com.example.admin.goparty.models.User;
 import com.example.admin.goparty.presenters.PartyPresenter;
 import com.example.admin.goparty.presenters.UserPresenter;
+import com.example.admin.goparty.views.activity.MapsActivity;
+import com.example.admin.goparty.views.activity.PartyActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -76,6 +79,9 @@ public class MainActivityFragment extends Fragment {
 
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
+
+                Intent intent = new Intent(getActivity(), PartyActivity.class);
+                startActivity(intent);
                 break;
             case R.id.link_forgotten_password:
                 text = inputUsername.getText() + " registered";

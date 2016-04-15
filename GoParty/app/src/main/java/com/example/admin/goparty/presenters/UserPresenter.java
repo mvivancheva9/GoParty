@@ -19,21 +19,20 @@ public class UserPresenter {
 
     private SqLiteDbHelper sqlDb;
 
-    ApiInterface service = ApiInterface.retrofit.create(ApiInterface.class);
-
     String responseMessage = "";
 
     public String registerUser(final User user){
 
         RequestRegisterUserModel requestRegisterUserModel = new RequestRegisterUserModel(user.getEmail(), user.getPassword(), user.getPassword());
 
-        Call<Void> call = service.addUser(requestRegisterUserModel);
+        Call<Void> call = ApiInterface.service.addUser(requestRegisterUserModel);
 
         try {
-            call.execute().body();
-                responseMessage = "Success";
+            Void response = call.execute().body();
+            responseMessage = "Success";
         } catch (IOException e) {
             e.printStackTrace();
+            responseMessage = "Error";
         }
         return responseMessage;
     }
@@ -41,7 +40,7 @@ public class UserPresenter {
     public String loginUser(User user, Context context){
 
         sqlDb = new SqLiteDbHelper(context);
-        Call<LoginUserResponseModel> call = service.loginUser(user.getEmail(), user.getPassword(), "password", user.getEmail());
+        Call<LoginUserResponseModel> call = ApiInterface.service.loginUser(user.getEmail(), user.getPassword(), "password", user.getEmail());
 
         try {
             LoginUserResponseModel response = call.execute().body();

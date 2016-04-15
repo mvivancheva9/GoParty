@@ -22,9 +22,9 @@ public class PartyPresenter {
 
     public List<Party> getAllParties(){
 
-        ApiInterface service = ApiInterface.retrofit.create(ApiInterface.class);
 
-        Call<List<Party>> call = service.getParties();
+
+        Call<List<Party>> call = ApiInterface.service.getParties();
         try {
             parties=call.execute().body();
         } catch (IOException e) {
@@ -35,9 +35,7 @@ public class PartyPresenter {
 
     public void getPartyById(int partyId){
 
-        ApiInterface service = ApiInterface.retrofit.create(ApiInterface.class);
-
-        Call<Party> call = service.getParty(partyId);
+        Call<Party> call = ApiInterface.service.getParty(partyId);
 
         call.enqueue(new Callback<Party>() {
             @Override
@@ -86,10 +84,9 @@ public class PartyPresenter {
 //                return response;
 //            }
 //        });
-        ApiInterface service = ApiInterface.retrofit.create(ApiInterface.class);
 
         PartyRequestModel partyRequestModel = new PartyRequestModel(party.getLatitude(), party.getLongitude(), party.getTitle().toString(), party.getDuration());
-        Call<Party> call = service.addParty(partyRequestModel);
+        Call<Party> call = ApiInterface.service.addParty(partyRequestModel);
 
         call.enqueue(new Callback<Party>() {
             @Override

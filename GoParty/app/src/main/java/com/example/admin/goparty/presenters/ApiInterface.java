@@ -32,6 +32,8 @@ public interface ApiInterface {
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 
+    ApiInterface service = ApiInterface.retrofit.create(ApiInterface.class);
+
     @POST("/api/Account/Register")
     Call<Void> addUser(@Body RequestRegisterUserModel userToRegister);
 

@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.admin.goparty.R;
 import com.example.admin.goparty.models.Party;
 import com.example.admin.goparty.presenters.PartyPresenter;
+import com.example.admin.goparty.views.Helpers.getItemsLists;
 import com.example.admin.goparty.views.adapter.ListDemoAdapter;
 
 import org.json.JSONException;
@@ -29,7 +30,7 @@ import java.util.concurrent.ExecutionException;
 
 public class PartyListFragment extends ListFragment {
     private List<Party> partyArrayList;
-    private PartyPresenter partyPresenter;
+
     private ListDemoAdapter listDemoAdapter;
     Context context;
 
@@ -42,11 +43,9 @@ public class PartyListFragment extends ListFragment {
         super.onCreate(savedInstanceState);
         context = getActivity();
 
-        partyPresenter = new PartyPresenter();
-
         partyArrayList = new ArrayList<Party>();
 
-        getItemLists gfl = new getItemLists();
+        getItemsLists gfl = new getItemsLists();
         gfl.execute();
 
         try {
@@ -80,38 +79,12 @@ public class PartyListFragment extends ListFragment {
         intent.setType("vnd.android.cursor.item/event");
         intent.putExtra("beginTime", cal.getTimeInMillis());
         intent.putExtra("allDay", false);
-        intent.putExtra("description", "Location here: " + myAddress.getLatitude() + " " + myAddress.getLongitude());
+        intent.putExtra("eventLocation", myAddress.getLatitude() + " " + myAddress.getLongitude());
         intent.putExtra("rrule", "FREQ=YEARLY");
         intent.putExtra("endTime", cal.getTimeInMillis()+item.getDuration());
         intent.putExtra("title", item.getTitle().toString());
         startActivity(intent);
         // do something
         Toast.makeText(getActivity(), item.getTitle().toString(), Toast.LENGTH_SHORT).show();
-    }
-    private class getItemLists extends
-            AsyncTask<Void, String, ArrayList<Party>> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected void onProgressUpdate(String... values) {
-            super.onProgressUpdate(values);
-        }
-
-        @Override
-        protected ArrayList<Party> doInBackground(Void... params) {
-            ArrayList<Party> fal = (ArrayList<Party>) partyPresenter.getAllParties();
-            return fal;
-        }
-
-        @Override
-        protected void onPostExecute(ArrayList<Party> result) {
-            super.onPostExecute(result);
-            partyArrayList = result;
-
-
-        }
     }
 }

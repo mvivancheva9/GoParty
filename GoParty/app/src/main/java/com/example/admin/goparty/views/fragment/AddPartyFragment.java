@@ -14,8 +14,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.admin.goparty.R;
-import com.example.admin.goparty.models.Party;
-import com.example.admin.goparty.presenters.PartyPresenter;
 import com.example.admin.goparty.views.activity.MapsActivity;
 
 import butterknife.Bind;

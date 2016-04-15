@@ -1,9 +1,9 @@
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/user_content_main"
-    android:name="com.example.admin.goparty.views.fragment.MainActivityFragment"
+    android:id="@+id/register_user_content_main"
+    android:name="com.example.admin.goparty.views.fragment.RegisterUser"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:layout="@layout/fragment_main" />
+    tools:layout="@layout/fragment_register_user" />

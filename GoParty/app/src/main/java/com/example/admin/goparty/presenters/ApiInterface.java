@@ -12,6 +12,8 @@ import com.google.gson.JsonObject;
 import java.util.List;
 
 import retrofit.Call;
+import retrofit.GsonConverterFactory;
+import retrofit.Retrofit;
 import retrofit.http.Body;
 import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
@@ -22,6 +24,13 @@ import retrofit.http.POST;
 import retrofit.http.Path;
 
 public interface ApiInterface {
+
+    static String url = "http://goparty.apphb.com";
+
+    Retrofit retrofit = new Retrofit.Builder()
+            .baseUrl(url)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
 
     @POST("/api/Account/Register")
     Call<Void> addUser(@Body RequestRegisterUserModel userToRegister);

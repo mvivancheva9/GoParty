@@ -1,20 +1,10 @@
 package com.example.admin.goparty.presenters;
 import android.content.Context;
-import android.content.Intent;
-import android.database.Observable;
-import android.os.Parcelable;
-import android.support.v4.app.FragmentManager;
 
-import com.example.admin.goparty.R;
 import com.example.admin.goparty.data.SqLiteDbHelper;
 import com.example.admin.goparty.models.Party;
 import com.example.admin.goparty.models.PartyRequestModel;
 import com.example.admin.goparty.models.PartyResponseModel;
-import com.example.admin.goparty.views.activity.PartyActivity;
-import com.example.admin.goparty.views.fragment.PartyListFragment;
-import com.squareup.okhttp.Interceptor;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,28 +12,17 @@ import java.util.List;
 
 import retrofit.Call;
 import retrofit.Callback;
-import retrofit.GsonConverterFactory;
 import retrofit.Response;
-import retrofit.Retrofit;
 
 public class PartyPresenter {
 
-    static String url = "http://goparty.apphb.com";
-
-    private static okhttp3.OkHttpClient.Builder httpClient = new okhttp3.OkHttpClient.Builder();
     private SqLiteDbHelper sqlDb;
-    OkHttpClient client = new OkHttpClient();
+
     List<Party> parties = new ArrayList<Party>();
 
     public List<Party> getAllParties(){
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(url)
-                .client(client)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        ApiInterface service = retrofit.create(ApiInterface.class);
+        ApiInterface service = ApiInterface.retrofit.create(ApiInterface.class);
 
         Call<List<Party>> call = service.getParties();
         try {
@@ -55,12 +34,8 @@ public class PartyPresenter {
     }
 
     public void getPartyById(int partyId){
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(url)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
 
-        ApiInterface service = retrofit.create(ApiInterface.class);
+        ApiInterface service = ApiInterface.retrofit.create(ApiInterface.class);
 
         Call<Party> call = service.getParty(partyId);
 
@@ -83,37 +58,35 @@ public class PartyPresenter {
 
     public void addParty(final Context context, Party party){
         sqlDb = new SqLiteDbHelper(context);
+        final String token;
 
-        List<String> list = sqlDb.getAllUsers();
+        List<String> list = sqlDb. getAllUsers();
 
-        final String token = list.get(0);
-
-        client.interceptors().add(new Interceptor() {
-            @Override
-            public com.squareup.okhttp.Response intercept(Chain chain) throws IOException {
-                com.squareup.okhttp.Response response = chain.proceed(chain.request());
-
-                Request original = chain.request();
-
-                Request.Builder requestBuilder = original.newBuilder()
-                        .header("Accept", "application/json")
-                        .header("Authorization",
-                                "Bearer " + token)
-                        .method(original.method(), original.body());
-
-                Request request = requestBuilder.build();
-
-                return response;
-            }
-        });
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(url)
-                .client(client)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        ApiInterface service = retrofit.create(ApiInterface.class);
+//        if (list.size() != 0) {
+//
+//            token = list.get(0);
+//        }else{
+//            token = "";
+//        }
+//        client.interceptors().add(new Interceptor() {
+//            @Override
+//            public com.squareup.okhttp.Response intercept(Chain chain) throws IOException {
+//                com.squareup.okhttp.Response response = chain.proceed(chain.request());
+//
+//                Request original = chain.request();
+//
+//                Request.Builder requestBuilder = original.newBuilder()
+//                        .header("Accept", "application/json")
+//                        .header("Authorization",
+//                                "Bearer " + token)
+//                        .method(original.method(), original.body());
+//
+//                Request request = requestBuilder.build();
+//
+//                return response;
+//            }
+//        });
+        ApiInterface service = ApiInterface.retrofit.create(ApiInterface.class);
 
         PartyRequestModel partyRequestModel = new PartyRequestModel(party.getLatitude(), party.getLongitude(), party.getTitle().toString(), party.getDuration());
         Call<Party> call = service.addParty(partyRequestModel);
@@ -125,7 +98,6 @@ public class PartyPresenter {
                 System.out.println("Response status code: " + response.code());
                 PartyResponseModel party = new PartyResponseModel(response.body().getLatitude(), response.body().getLongitude(), response.body().getTitle().toString(), response.body().getDuration());
 
-                //TODO -> partyDetails
             }
 
             @Override
@@ -134,8 +106,5 @@ public class PartyPresenter {
                 System.out.println(t.getMessage());
             }
         });
-    }
-    public List<Party> loadParties(){
-        return parties;
     }
 }

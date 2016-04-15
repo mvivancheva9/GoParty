@@ -2,9 +2,12 @@ package com.example.admin.goparty.views.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.AppCompatButton;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,11 +18,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.admin.goparty.R;
+import com.example.admin.goparty.models.Party;
 import com.example.admin.goparty.models.User;
 import com.example.admin.goparty.presenters.PartyPresenter;
 import com.example.admin.goparty.presenters.UserPresenter;
+import com.example.admin.goparty.views.Helpers.loginUser;
+import com.example.admin.goparty.views.activity.MainActivity;
 import com.example.admin.goparty.views.activity.MapsActivity;
 import com.example.admin.goparty.views.activity.PartyActivity;
+import com.example.admin.goparty.views.activity.RegisterUserActivity;
+
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -46,8 +56,10 @@ public class MainActivityFragment extends Fragment {
     TextView linkForgottenPassword;
     Context context;
     User user;
-    UserPresenter rp = new UserPresenter();
+    UserPresenter rp;
     PartyPresenter partyPresenter = new PartyPresenter();
+
+    String result = "";
 
     public MainActivityFragment() {
     }
@@ -58,6 +70,7 @@ public class MainActivityFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         ButterKnife.bind(this, view);
         context = inflater.getContext();
+        rp = new UserPresenter();
 
         return view;
     }
@@ -70,34 +83,50 @@ public class MainActivityFragment extends Fragment {
 
     @OnClick({R.id.btn_login, R.id.link_forgotten_password})
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.btn_login:
-                CharSequence text = "User Successfully Logged In!";
-                int duration = Toast.LENGTH_SHORT;
-                user = new User(inputUsername.getText().toString(), inputPassword.getText().toString(),inputUsername.getText().toString());
-                rp.loginUser(user,this.getContext());
+        Toast toast = new Toast(context);
+        Intent intent = new Intent();
+            switch (view.getId()) {
+                case R.id.btn_login:
+                    if(inputUsername.getText().toString().trim().isEmpty() || inputPassword.getText().toString().trim().isEmpty()){
+                        CharSequence text = "Both fields are required";
+                        int durationLength = Toast.LENGTH_SHORT;
+                        toast = Toast.makeText(context, text, durationLength);
+                        toast.show();
+                    }else {
+                        CharSequence text = "User Successfully Logged In!";
+                        int duration = Toast.LENGTH_SHORT;
+                        user = new User(inputUsername.getText().toString(), inputPassword.getText().toString(), inputUsername.getText().toString());
 
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
+                        loginUser loginUser = new loginUser(context, user);
+                        loginUser.execute();
 
-                Intent intent = new Intent(getActivity(), PartyActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.link_forgotten_password:
-                text = inputUsername.getText() + " registered";
+                        try {
+                            result = loginUser.get();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        } catch (ExecutionException e) {
+                            e.printStackTrace();
+                        }
 
-                duration = Toast.LENGTH_SHORT;
+                        if (result == "Success") {
 
-                user = new User(inputUsername.getText().toString(), inputPassword.getText().toString(),inputUsername.getText().toString());
+                            toast = Toast.makeText(context, text, duration);
+                            toast.show();
 
-                rp.registerUser(user, context);
+                            intent = new Intent(getActivity(), PartyActivity.class);
+                            startActivity(intent);
+                        } else {
+                            text = "Email ot password doesn't match";
 
-                toast = Toast.makeText(context, text, duration);
-                toast.show();
-
-                intent = new Intent(getActivity(), PartyActivity.class);
-                startActivity(intent);
-                break;
+                            toast = Toast.makeText(context, text, duration);
+                            toast.show();
+                        }
+                    }
+                    break;
+                case R.id.link_forgotten_password:
+                    intent = new Intent(getActivity(), RegisterUserActivity.class);
+                    startActivity(intent);
+                    break;
+            }
         }
     }
-}

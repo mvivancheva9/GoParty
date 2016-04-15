@@ -10,16 +10,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- * Created by Admin on 4/12/2016.
- */
 public class SqLiteDbHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "UserInfo.db";
     public static final String USERINFO_TABLE_NAME = "users";
-    public static final String USERINFO_COLUMN_ID = "id";
     public static final String USERINFO_COLUMN_TOKEN = "token";
-    public static final String USERINFO_COLUMN_USERNAME = "email";
     private HashMap hp;
 
     public SqLiteDbHelper(Context context)

@@ -29,15 +29,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".views.activity.PartyActivity"
+        <activity android:name=".views.activity.PartyActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        </activity>
+        <activity android:name=".views.activity.RegisterUserActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -49,11 +47,14 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
+            android:value="AIzaSyBJHw03FXHdL-Z4Dz3RWFs9Wbf0D1ii770" />
 
         <activity
             android:name=".views.activity.MapsActivity"
             android:label="@string/title_activity_maps"></activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="4845d177b95df4cd644b1eb97327b270ee832341" />
     </application>
 
 </manifest>

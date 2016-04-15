@@ -17,61 +17,48 @@ import retrofit.Response;
 
 public class UserPresenter {
 
-    String url = "http://goparty.apphb.com";
     private SqLiteDbHelper sqlDb;
 
-    Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl(url)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
+    ApiInterface service = ApiInterface.retrofit.create(ApiInterface.class);
 
-    ApiInterface service = retrofit.create(ApiInterface.class);
+    String responseMessage = "";
 
-    public void registerUser(final User user, final Context context){
+    public String registerUser(final User user){
 
         RequestRegisterUserModel requestRegisterUserModel = new RequestRegisterUserModel(user.getEmail(), user.getPassword(), user.getPassword());
 
         Call<Void> call = service.addUser(requestRegisterUserModel);
 
-        call.enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Response<Void> response) {
-
-                loginUser(user, context);
-            }
-            @Override
-            public void onFailure(Throwable caught) {
-                // Convenient way to find out which exception was thrown.
-                try {
-                    throw caught;
-                } catch (IOException e) {
-                    String message = e.getMessage();
-                } catch (Throwable e) {
-                    // last resort -- a very unexpected exception
-                }
-            }
-        });
+        try {
+            call.execute().body();
+                responseMessage = "Success";
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return responseMessage;
     }
 
-    public void loginUser(User user, Context context){
+    public String loginUser(User user, Context context){
 
         sqlDb = new SqLiteDbHelper(context);
         Call<LoginUserResponseModel> call = service.loginUser(user.getEmail(), user.getPassword(), "password", user.getEmail());
 
-        call.enqueue(new Callback<LoginUserResponseModel>() {
-            @Override
-            public void onResponse(Response<LoginUserResponseModel> response) {
-                String token = response.body().getAccessToken();
-                String userName = response.body().getUserName();
+        try {
+            LoginUserResponseModel response = call.execute().body();
+            sqlDb.deleteContact();
+            if (response != null) {
+                String token = response.getAccessToken();
+                String userName = response.getUserName();
                 sqlDb.deleteContact();
                 sqlDb.insertUser(token, userName);
-
+                responseMessage = "Success";
             }
-            @Override
-            public void onFailure(Throwable t) {
-                System.out.println("onFailure");
-                System.out.println(t.getMessage());
+            else{
+                responseMessage = "The user name or password is incorrect.";
             }
-        });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return responseMessage;
     }
 }

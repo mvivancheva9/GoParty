@@ -50,7 +50,7 @@ public class AddPartyFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.add_party_fragment, container, false);
+        View view = inflater.inflate(R.layout.fragment_add_party, container, false);
         ButterKnife.bind(this, view);
         context = inflater.getContext();
         return view;

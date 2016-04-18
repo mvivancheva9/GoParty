@@ -18,10 +18,10 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="Button">
-        <item name="android:background">@drawable/round_button</item>
+        <item name="android:background">@drawable/button_states</item>
         <item name="android:layout_marginRight">30dp</item>
         <item name="android:layout_marginLeft">30dp</item>
-        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textColor">@android:color/white</item>
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">24dp</item>
@@ -30,7 +30,7 @@
     </style>
 
     <style name="ButtonAddParty">
-        <item name="android:background">@drawable/round_button</item>
+        <item name="android:background">@drawable/add_party_button</item>
         <item name="android:textColor">@color/colorAccent</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>

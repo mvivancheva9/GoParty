@@ -25,7 +25,7 @@ import retrofit.http.Path;
 
 public interface ApiInterface {
 
-    static String url = "http://goparty.apphb.com";
+    static String url = "http://goparty.azurewebsites.net";
 
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(url)

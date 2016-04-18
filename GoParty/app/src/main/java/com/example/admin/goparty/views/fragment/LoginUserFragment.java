@@ -2,14 +2,13 @@ package com.example.admin.goparty.views.fragment;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.AppCompatButton;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -18,17 +17,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.admin.goparty.R;
-import com.example.admin.goparty.models.Party;
 import com.example.admin.goparty.models.User;
 import com.example.admin.goparty.presenters.PartyPresenter;
 import com.example.admin.goparty.presenters.UserPresenter;
 import com.example.admin.goparty.views.Helpers.loginUser;
-import com.example.admin.goparty.views.activity.MainActivity;
-import com.example.admin.goparty.views.activity.MapsActivity;
 import com.example.admin.goparty.views.activity.PartyActivity;
-import com.example.admin.goparty.views.activity.RegisterUserActivity;
 
-import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 import butterknife.Bind;
@@ -38,7 +32,7 @@ import butterknife.OnClick;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MainActivityFragment extends Fragment {
+public class LoginUserFragment extends Fragment implements View.OnTouchListener {
 
     @Bind(R.id.logo_image)
     ImageView logoImage;
@@ -61,13 +55,13 @@ public class MainActivityFragment extends Fragment {
 
     String result = "";
 
-    public MainActivityFragment() {
+    public LoginUserFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_main, container, false);
+        View view = inflater.inflate(R.layout.fragment_login_user, container, false);
         ButterKnife.bind(this, view);
         context = inflater.getContext();
         rp = new UserPresenter();
@@ -87,7 +81,7 @@ public class MainActivityFragment extends Fragment {
         Intent intent = new Intent();
             switch (view.getId()) {
                 case R.id.btn_login:
-                    if(inputUsername.getText().toString().trim().isEmpty() || inputPassword.getText().toString().trim().isEmpty()){
+                    if (inputUsername.getText().toString().trim().isEmpty() || inputPassword.getText().toString().trim().isEmpty()){
                         CharSequence text = "Both fields are required";
                         int durationLength = Toast.LENGTH_SHORT;
                         toast = Toast.makeText(context, text, durationLength);
@@ -124,9 +118,26 @@ public class MainActivityFragment extends Fragment {
                     }
                     break;
                 case R.id.link_forgotten_password:
-                    intent = new Intent(getActivity(), RegisterUserActivity.class);
-                    startActivity(intent);
+                    getFragmentManager()
+                            .beginTransaction()
+                            .setCustomAnimations(R.anim.enter_anim, R.anim.exit_anim)
+                            .replace(R.id.user_content_main, new RegisterNewUserFragment())
+                            .addToBackStack("register")
+                            .commit();
                     break;
             }
         }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        linkForgottenPassword.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                linkForgottenPassword.setTextColor(R.color.colorPrimaryDark);
+                return false;
+            }
+        });
+        return false;
     }
+}

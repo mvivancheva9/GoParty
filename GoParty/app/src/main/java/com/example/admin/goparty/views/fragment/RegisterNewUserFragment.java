@@ -17,10 +17,8 @@ import com.example.admin.goparty.R;
 import com.example.admin.goparty.models.User;
 import com.example.admin.goparty.presenters.PartyPresenter;
 import com.example.admin.goparty.presenters.UserPresenter;
-import com.example.admin.goparty.views.Helpers.loginUser;
 import com.example.admin.goparty.views.Helpers.registerUser;
-import com.example.admin.goparty.views.activity.MainActivity;
-import com.example.admin.goparty.views.activity.PartyActivity;
+import com.example.admin.goparty.views.activity.UserActivity;
 
 import java.util.concurrent.ExecutionException;
 
@@ -28,9 +26,10 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class RegisterUser extends Fragment {
-
-
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class RegisterNewUserFragment extends Fragment {
     @Bind(R.id.input_username)
     EditText inputUsername;
     @Bind(R.id.username_content)
@@ -55,7 +54,7 @@ public class RegisterUser extends Fragment {
     CharSequence text;
     String result;
 
-    public RegisterUser() {
+    public RegisterNewUserFragment() {
         // Required empty public constructor
     }
 
@@ -68,7 +67,7 @@ public class RegisterUser extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_register_user, container, false);
+        View view = inflater.inflate(R.layout.fragment_register_new_user, container, false);
         ButterKnife.bind(this, view);
         context = inflater.getContext();
         rp = new UserPresenter();
@@ -104,6 +103,16 @@ public class RegisterUser extends Fragment {
 
             user = new User(inputUsername.getText().toString(), inputPassword.getText().toString(), inputUsername.getText().toString());
 
+            toast = Toast.makeText(context, text, duration);
+            toast.show();
+
+            getFragmentManager()
+                    .beginTransaction()
+                    .setCustomAnimations(R.anim.enter_anim, R.anim.exit_anim)
+                    .replace(R.id.user_content_main, new LoginUserFragment())
+                    .addToBackStack("register")
+                    .commit();
+
             registerUser registerUser = new registerUser(context, user);
             registerUser.execute();
 
@@ -114,12 +123,6 @@ public class RegisterUser extends Fragment {
             } catch (ExecutionException e) {
                 e.printStackTrace();
             }
-
-                toast = Toast.makeText(context, text, duration);
-                toast.show();
-
-                intent = new Intent(getActivity(), MainActivity.class);
-                startActivity(intent);
         }
     }
 }

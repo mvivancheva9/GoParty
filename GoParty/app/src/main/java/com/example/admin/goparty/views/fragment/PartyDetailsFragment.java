@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.admin.goparty.R;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -45,6 +46,7 @@ public class PartyDetailsFragment extends Fragment implements OnMapReadyCallback
     Double longitude;
     String title;
     String duration;
+    private static LatLng partyLocation;
 
 
     public PartyDetailsFragment() {
@@ -59,6 +61,8 @@ public class PartyDetailsFragment extends Fragment implements OnMapReadyCallback
         duration = getArguments().getString("duration");
         latitude = getArguments().getDouble("latitude");
         longitude = getArguments().getDouble("longitude");
+
+        partyLocation = new LatLng(latitude,longitude);
     }
 
     @Override
@@ -114,6 +118,8 @@ public class PartyDetailsFragment extends Fragment implements OnMapReadyCallback
         mMap.addMarker(new MarkerOptions()
                 .position(new LatLng(latitude, longitude))
                 .title("Party Here"));
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(partyLocation, 15));
     }
 
     @OnClick(R.id.btn_add_to_calendar)

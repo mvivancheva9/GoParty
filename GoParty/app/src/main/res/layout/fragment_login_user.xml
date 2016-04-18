@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:fitsSystemWindows="true"
+    android:layout_height="match_parent"
     android:background="#CCFFFFFF"
-    android:layout_margin="20dp"
-    android:orientation="vertical"
-    android:paddingLeft="24dp"
-    android:paddingRight="24dp"
     xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        xmlns:android="http://schemas.android.com/apk/res/android">
 
         <ImageView
             android:src="@drawable/logo"
@@ -45,7 +48,6 @@
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_login"
             android:text="Login"
-            android:stateListAnimator="@anim/button_reveal"
             style="@style/Button"/>
 
         <TextView android:id="@+id/link_forgotten_password"
@@ -57,3 +59,4 @@
             android:textSize="16dip"/>
 
     </LinearLayout>
+</ScrollView>

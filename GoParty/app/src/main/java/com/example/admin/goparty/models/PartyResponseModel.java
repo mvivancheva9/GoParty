@@ -4,6 +4,17 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class PartyResponseModel implements Parcelable {
+    public static final Parcelable.Creator<PartyResponseModel> CREATOR = new Parcelable.Creator<PartyResponseModel>() {
+        @Override
+        public PartyResponseModel createFromParcel(Parcel source) {
+            return new PartyResponseModel(source);
+        }
+
+        @Override
+        public PartyResponseModel[] newArray(int size) {
+            return new PartyResponseModel[size];
+        }
+    };
     private Double latitude;
     private Double longitude;
     private Integer duration;
@@ -14,6 +25,13 @@ public class PartyResponseModel implements Parcelable {
         this.longitude = longitude;
         this.title = title;
         this.duration = duration;
+    }
+
+    protected PartyResponseModel(Parcel in) {
+        this.latitude = (Double) in.readValue(Double.class.getClassLoader());
+        this.longitude = (Double) in.readValue(Double.class.getClassLoader());
+        this.duration = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.title = in.readString();
     }
 
     public Double getLatitude() {
@@ -60,23 +78,4 @@ public class PartyResponseModel implements Parcelable {
         dest.writeValue(this.duration);
         dest.writeString(this.title);
     }
-
-    protected PartyResponseModel(Parcel in) {
-        this.latitude = (Double) in.readValue(Double.class.getClassLoader());
-        this.longitude = (Double) in.readValue(Double.class.getClassLoader());
-        this.duration = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.title = in.readString();
-    }
-
-    public static final Parcelable.Creator<PartyResponseModel> CREATOR = new Parcelable.Creator<PartyResponseModel>() {
-        @Override
-        public PartyResponseModel createFromParcel(Parcel source) {
-            return new PartyResponseModel(source);
-        }
-
-        @Override
-        public PartyResponseModel[] newArray(int size) {
-            return new PartyResponseModel[size];
-        }
-    };
 }

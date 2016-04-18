@@ -17,8 +17,7 @@ import com.example.admin.goparty.R;
 import com.example.admin.goparty.models.User;
 import com.example.admin.goparty.presenters.PartyPresenter;
 import com.example.admin.goparty.presenters.UserPresenter;
-import com.example.admin.goparty.views.Helpers.registerUser;
-import com.example.admin.goparty.views.activity.UserActivity;
+import com.example.admin.goparty.views.Helpers.RegisterUser;
 
 import java.util.concurrent.ExecutionException;
 
@@ -63,6 +62,7 @@ public class RegisterNewUserFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -84,19 +84,19 @@ public class RegisterNewUserFragment extends Fragment {
     @OnClick(R.id.btn_register)
     public void onClick() {
         if (inputUsername.getText().toString().trim().isEmpty() || inputPassword.getText().toString().trim().isEmpty()
-                || inputConfirmPassword.getText().toString().trim().isEmpty()){
+                || inputConfirmPassword.getText().toString().trim().isEmpty()) {
             CharSequence text = "All fields are required";
             int durationLength = Toast.LENGTH_SHORT;
             Toast toast = Toast.makeText(context, text, durationLength);
             toast.show();
-        }else if (!inputPassword.getText().toString().equals(inputConfirmPassword.getText().toString())){
+        } else if (!inputPassword.getText().toString().equals(inputConfirmPassword.getText().toString())) {
             text = "Passwords does not match";
 
             duration = Toast.LENGTH_LONG;
 
             toast = Toast.makeText(context, text, duration);
             toast.show();
-        }else {
+        } else {
             text = "User Successfully Registered!";
 
             duration = Toast.LENGTH_LONG;
@@ -113,11 +113,11 @@ public class RegisterNewUserFragment extends Fragment {
                     .addToBackStack("register")
                     .commit();
 
-            registerUser registerUser = new registerUser(context, user);
-            registerUser.execute();
+            RegisterUser RegisterUser = new RegisterUser(context, user);
+            RegisterUser.execute();
 
             try {
-                result = registerUser.get();
+                result = RegisterUser.get();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } catch (ExecutionException e) {

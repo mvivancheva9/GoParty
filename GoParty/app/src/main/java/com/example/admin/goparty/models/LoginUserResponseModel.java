@@ -25,108 +25,84 @@ public class LoginUserResponseModel {
     private String Expires;
 
     /**
-     *
-     * @return
-     * The accessToken
+     * @return The accessToken
      */
     public String getAccessToken() {
         return accessToken;
     }
 
     /**
-     *
-     * @param accessToken
-     * The access_token
+     * @param accessToken The access_token
      */
     public void setAccessToken(String accessToken) {
         this.accessToken = accessToken;
     }
 
     /**
-     *
-     * @return
-     * The tokenType
+     * @return The tokenType
      */
     public String getTokenType() {
         return tokenType;
     }
 
     /**
-     *
-     * @param tokenType
-     * The token_type
+     * @param tokenType The token_type
      */
     public void setTokenType(String tokenType) {
         this.tokenType = tokenType;
     }
 
     /**
-     *
-     * @return
-     * The expiresIn
+     * @return The expiresIn
      */
     public Integer getExpiresIn() {
         return expiresIn;
     }
 
     /**
-     *
-     * @param expiresIn
-     * The expires_in
+     * @param expiresIn The expires_in
      */
     public void setExpiresIn(Integer expiresIn) {
         this.expiresIn = expiresIn;
     }
 
     /**
-     *
-     * @return
-     * The userName
+     * @return The userName
      */
     public String getUserName() {
         return userName;
     }
 
     /**
-     *
-     * @param userName
-     * The userName
+     * @param userName The userName
      */
     public void setUserName(String userName) {
         this.userName = userName;
     }
 
     /**
-     *
-     * @return
-     * The Issued
+     * @return The Issued
      */
     public String getIssued() {
         return Issued;
     }
 
     /**
-     *
-     * @param Issued
-     * The .issued
+     * @param Issued The .issued
      */
     public void setIssued(String Issued) {
         this.Issued = Issued;
     }
 
     /**
-     *
-     * @return
-     * The Expires
+     * @return The Expires
      */
     public String getExpires() {
         return Expires;
     }
 
     /**
-     *
-     * @param Expires
-     * The .expires
+     * @param Expires The .expires
      */
     public void setExpires(String Expires) {
         this.Expires = Expires;

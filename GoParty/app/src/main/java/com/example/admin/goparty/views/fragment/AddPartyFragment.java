@@ -65,12 +65,12 @@ public class AddPartyFragment extends Fragment {
     @OnClick(R.id.btn_add_location)
     public void onClick() {
 
-        if(inputTitle.getText().toString().trim().isEmpty() || inputDuration.getText().toString().trim().isEmpty()){
+        if (inputTitle.getText().toString().trim().isEmpty() || inputDuration.getText().toString().trim().isEmpty()) {
             CharSequence text = "Both fields are required";
             int durationLength = Toast.LENGTH_SHORT;
             Toast toast = Toast.makeText(context, text, durationLength);
             toast.show();
-        }else{
+        } else {
             String title = inputTitle.getText().toString();
             Integer duration = Integer.parseInt(inputDuration.getText().toString());
 

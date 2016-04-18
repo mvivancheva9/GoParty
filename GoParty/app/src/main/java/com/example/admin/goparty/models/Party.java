@@ -15,126 +15,98 @@ public class Party {
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     /**
-     *
-     * @return
-     * The Id
+     * @return The Id
      */
     public Integer getId() {
         return Id;
     }
 
     /**
-     *
-     * @param Id
-     * The Id
+     * @param Id The Id
      */
     public void setId(Integer Id) {
         this.Id = Id;
     }
 
     /**
-     *
-     * @return
-     * The Title
+     * @return The Title
      */
     public Object getTitle() {
         return Title;
     }
 
     /**
-     *
-     * @param Title
-     * The Title
+     * @param Title The Title
      */
     public void setTitle(Object Title) {
         this.Title = Title;
     }
 
     /**
-     *
-     * @return
-     * The Latitude
+     * @return The Latitude
      */
     public Double getLatitude() {
         return Latitude;
     }
 
     /**
-     *
-     * @param Latitude
-     * The Latitude
+     * @param Latitude The Latitude
      */
     public void setLatitude(Double Latitude) {
         this.Latitude = Latitude;
     }
 
     /**
-     *
-     * @return
-     * The Longitude
+     * @return The Longitude
      */
     public Double getLongitude() {
         return Longitude;
     }
 
     /**
-     *
-     * @param Longitude
-     * The Longitude
+     * @param Longitude The Longitude
      */
     public void setLongitude(Double Longitude) {
         this.Longitude = Longitude;
     }
 
     /**
-     *
-     * @return
-     * The Duration
+     * @return The Duration
      */
     public Integer getDuration() {
         return Duration;
     }
 
     /**
-     *
-     * @param Duration
-     * The Duration
+     * @param Duration The Duration
      */
     public void setDuration(Integer Duration) {
         this.Duration = Duration;
     }
 
     /**
-     *
-     * @return
-     * The startDate
+     * @return The startDate
      */
     public String getStartDate() {
         return startDate;
     }
 
     /**
-     *
-     * @param startDate
-     * The startDate
+     * @param startDate The startDate
      */
     public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
     /**
-     *
-     * @return
-     * The UserId
+     * @return The UserId
      */
     public String getUserId() {
         return UserId;
     }
 
     /**
-     *
-     * @param UserId
-     * The UserId
+     * @param UserId The UserId
      */
     public void setUserId(String UserId) {
         this.UserId = UserId;

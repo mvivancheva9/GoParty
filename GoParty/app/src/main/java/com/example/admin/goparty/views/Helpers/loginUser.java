@@ -10,16 +10,17 @@ import android.os.AsyncTask;
 import com.example.admin.goparty.models.User;
 import com.example.admin.goparty.presenters.UserPresenter;
 
-public class loginUser extends
+public class LoginUser extends
         AsyncTask<Void, String, String> {
     UserPresenter rp;
-    private User user;
     Context context;
+    private User user;
 
-    public loginUser(Context context, User user){
+    public LoginUser(Context context, User user) {
         this.user = user;
         this.context = context;
     }
+
     @Override
     protected void onPreExecute() {
         super.onPreExecute();

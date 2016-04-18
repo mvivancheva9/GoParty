@@ -1,6 +1,7 @@
 package com.example.admin.goparty.presenters;
 import android.content.Context;
 
+import com.example.admin.goparty.common.MyApplication;
 import com.example.admin.goparty.data.SqLiteDbHelper;
 import com.example.admin.goparty.models.Party;
 import com.example.admin.goparty.models.PartyRequestModel;
@@ -16,13 +17,9 @@ import retrofit.Response;
 
 public class PartyPresenter {
 
-    private SqLiteDbHelper sqlDb;
-
     List<Party> parties = new ArrayList<Party>();
-
+    MyApplication myApplication = MyApplication.getInstance();
     public List<Party> getAllParties(){
-
-
 
         Call<List<Party>> call = ApiInterface.service.getParties();
         try {
@@ -55,10 +52,9 @@ public class PartyPresenter {
     }
 
     public void addParty(final Context context, Party party){
-        sqlDb = new SqLiteDbHelper(context);
         final String token;
 
-        List<String> list = sqlDb. getAllUsers();
+        List<String> list  = myApplication.getSqlDb(). getAllUsers();
 
 //        if (list.size() != 0) {
 //

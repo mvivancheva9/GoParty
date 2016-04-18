@@ -8,19 +8,19 @@ import android.widget.ListView;
 
 import com.example.admin.goparty.R;
 import com.example.admin.goparty.models.Party;
-import com.example.admin.goparty.views.Helpers.getItemsLists;
 import com.example.admin.goparty.views.adapter.ListDemoAdapter;
+import com.example.admin.goparty.views.Helpers.GetItemsLists;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class PartyListFragment extends ListFragment {
-    private List<Party> partyArrayList;
-
-    private ListDemoAdapter listDemoAdapter;
     Context context;
+    private List<Party> partyArrayList;
+    private ListDemoAdapter listDemoAdapter;
 
-    public PartyListFragment(){
+    public PartyListFragment() {
 
     }
 
@@ -31,7 +31,7 @@ public class PartyListFragment extends ListFragment {
 
         partyArrayList = new ArrayList<Party>();
 
-        getItemsLists gfl = new getItemsLists();
+        GetItemsLists gfl = new GetItemsLists();
         gfl.execute();
 
         try {
@@ -58,9 +58,9 @@ public class PartyListFragment extends ListFragment {
         Party item = partyArrayList.get(position);
 
         Bundle bundle = new Bundle();
-        if(item.getTitle() == null){
+        if (item.getTitle() == null) {
             bundle.putString("title", "No Title");
-        }else {
+        } else {
             bundle.putString("title", item.getTitle().toString());
         }
         bundle.putString("duration", item.getStartDate());

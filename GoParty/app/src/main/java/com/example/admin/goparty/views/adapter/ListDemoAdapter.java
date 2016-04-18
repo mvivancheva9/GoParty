@@ -22,7 +22,7 @@ public class ListDemoAdapter extends ArrayAdapter<Party> {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
 
-        if(convertView == null) {
+        if (convertView == null) {
             // inflate the GridView item layout
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.party_list_row, parent, false);
@@ -41,12 +41,13 @@ public class ListDemoAdapter extends ArrayAdapter<Party> {
         if (item.getTitle() == null) {
             viewHolder.tvTitle.setText("No Title");
 
-        }else{
+        } else {
             viewHolder.tvTitle.setText(item.getTitle().toString());
         }
 
         return convertView;
     }
+
     private static class ViewHolder {
         TextView tvTitle;
     }

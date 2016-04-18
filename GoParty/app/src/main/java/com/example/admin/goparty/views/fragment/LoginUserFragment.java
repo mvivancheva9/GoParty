@@ -2,7 +2,6 @@ package com.example.admin.goparty.views.fragment;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
@@ -20,8 +19,8 @@ import com.example.admin.goparty.R;
 import com.example.admin.goparty.models.User;
 import com.example.admin.goparty.presenters.PartyPresenter;
 import com.example.admin.goparty.presenters.UserPresenter;
-import com.example.admin.goparty.views.Helpers.loginUser;
 import com.example.admin.goparty.views.activity.PartyActivity;
+import com.example.admin.goparty.views.Helpers.LoginUser;
 
 import java.util.concurrent.ExecutionException;
 
@@ -79,55 +78,55 @@ public class LoginUserFragment extends Fragment implements View.OnTouchListener 
     public void onClick(View view) {
         Toast toast = new Toast(context);
         Intent intent = new Intent();
-            switch (view.getId()) {
-                case R.id.btn_login:
-                    if (inputUsername.getText().toString().trim().isEmpty() || inputPassword.getText().toString().trim().isEmpty()){
-                        CharSequence text = "Both fields are required";
-                        int durationLength = Toast.LENGTH_SHORT;
-                        toast = Toast.makeText(context, text, durationLength);
-                        toast.show();
-                    }else {
-                        CharSequence text = "User Successfully Logged In!";
-                        int duration = Toast.LENGTH_SHORT;
-                        user = new User(inputUsername.getText().toString(), inputPassword.getText().toString(), inputUsername.getText().toString());
+        switch (view.getId()) {
+            case R.id.btn_login:
+                if (inputUsername.getText().toString().trim().isEmpty() || inputPassword.getText().toString().trim().isEmpty()) {
+                    CharSequence text = "Both fields are required";
+                    int durationLength = Toast.LENGTH_SHORT;
+                    toast = Toast.makeText(context, text, durationLength);
+                    toast.show();
+                } else {
+                    CharSequence text = "User Successfully Logged In!";
+                    int duration = Toast.LENGTH_SHORT;
+                    user = new User(inputUsername.getText().toString(), inputPassword.getText().toString(), inputUsername.getText().toString());
 
-                        loginUser loginUser = new loginUser(context, user);
-                        loginUser.execute();
+                    LoginUser LoginUser = new LoginUser(context, user);
+                    LoginUser.execute();
 
-                        try {
-                            result = loginUser.get();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        } catch (ExecutionException e) {
-                            e.printStackTrace();
-                        }
-
-                        if (result == "Success") {
-
-                            toast = Toast.makeText(context, text, duration);
-                            toast.show();
-
-                            intent = new Intent(getActivity(), PartyActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(intent);
-                        } else {
-                            text = "Email ot password doesn't match";
-
-                            toast = Toast.makeText(context, text, duration);
-                            toast.show();
-                        }
+                    try {
+                        result = LoginUser.get();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
                     }
-                    break;
-                case R.id.link_forgotten_password:
-                    getFragmentManager()
-                            .beginTransaction()
-                            .setCustomAnimations(R.anim.enter_anim, R.anim.exit_anim)
-                            .replace(R.id.user_content_main, new RegisterNewUserFragment())
-                            .addToBackStack(null)
-                            .commit();
-                    break;
-            }
+
+                    if (result == "Success") {
+
+                        toast = Toast.makeText(context, text, duration);
+                        toast.show();
+
+                        intent = new Intent(getActivity(), PartyActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                    } else {
+                        text = "Email ot password doesn't match";
+
+                        toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                    }
+                }
+                break;
+            case R.id.link_forgotten_password:
+                getFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.enter_anim, R.anim.exit_anim)
+                        .replace(R.id.user_content_main, new RegisterNewUserFragment())
+                        .addToBackStack(null)
+                        .commit();
+                break;
         }
+    }
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {

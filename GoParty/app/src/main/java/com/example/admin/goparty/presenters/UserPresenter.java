@@ -2,6 +2,7 @@ package com.example.admin.goparty.presenters;
 
 import android.content.Context;
 
+import com.example.admin.goparty.common.MyApplication;
 import com.example.admin.goparty.data.SqLiteDbHelper;
 import com.example.admin.goparty.models.LoginUserResponseModel;
 import com.example.admin.goparty.models.RequestRegisterUserModel;
@@ -17,9 +18,9 @@ import retrofit.Response;
 
 public class UserPresenter {
 
-    private SqLiteDbHelper sqlDb;
-
     String responseMessage = "";
+
+    MyApplication myApplication = MyApplication.getInstance();
 
     public String registerUser(final User user){
 
@@ -39,17 +40,16 @@ public class UserPresenter {
 
     public String loginUser(User user, Context context){
 
-        sqlDb = new SqLiteDbHelper(context);
         Call<LoginUserResponseModel> call = ApiInterface.service.loginUser(user.getEmail(), user.getPassword(), "password", user.getEmail());
 
         try {
             LoginUserResponseModel response = call.execute().body();
-            sqlDb.deleteContact();
+            myApplication.getSqlDb().deleteContact();
             if (response != null) {
                 String token = response.getAccessToken();
                 String userName = response.getUserName();
-                sqlDb.deleteContact();
-                sqlDb.insertUser(token, userName);
+                myApplication.getSqlDb().deleteContact();
+                myApplication.getSqlDb().insertUser(token, userName);
                 responseMessage = "Success";
             }
             else{

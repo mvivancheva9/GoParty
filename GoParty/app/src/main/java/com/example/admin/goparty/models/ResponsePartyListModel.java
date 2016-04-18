@@ -11,8 +11,8 @@ public class ResponsePartyListModel {
         return partyList;
     }
 
-    public void add(Party party){
-        if(partyList == null){
+    public void add(Party party) {
+        if (partyList == null) {
             partyList = new LinkedList<>();
         }
         partyList.add(party);

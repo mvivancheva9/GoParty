@@ -3,7 +3,6 @@ package com.example.admin.goparty.views.activity;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
@@ -11,9 +10,9 @@ import android.support.v7.widget.AppCompatButton;
 import android.widget.Toast;
 
 import com.example.admin.goparty.R;
+import com.example.admin.goparty.common.MyApplication;
 import com.example.admin.goparty.models.Party;
 import com.example.admin.goparty.presenters.PartyPresenter;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -29,13 +28,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Bind(R.id.btn_add_location)
     AppCompatButton btnAddLocation;
-    private GoogleMap mMap;
     LatLng tappedPoint;
-    PartyPresenter partyPresenter = new PartyPresenter();
     Party party;
+    private GoogleMap mMap;
+    MyApplication myApplication;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        myApplication = (MyApplication) getApplicationContext();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps2);
         ButterKnife.bind(this);
@@ -99,10 +100,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @OnClick(R.id.btn_add_location)
     public void onClick() {
-        if(tappedPoint != null){
+        if (tappedPoint != null) {
             party.setLatitude(tappedPoint.latitude);
             party.setLongitude(tappedPoint.longitude);
-            partyPresenter.addParty(this, party);
+            myApplication.getPartyPresenter().addParty(this, party);
 
             CharSequence text = "Party Successfully added";
             int duration = Toast.LENGTH_SHORT;
@@ -111,8 +112,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             toast.show();
             Intent intent = new Intent(this, PartyActivity.class);
             startActivity(intent);
-        }
-        else{
+        } else {
 
             CharSequence text = "Tap on the map to add location";
             int duration = Toast.LENGTH_SHORT;

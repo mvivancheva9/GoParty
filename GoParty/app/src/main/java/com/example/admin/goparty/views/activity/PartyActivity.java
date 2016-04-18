@@ -1,4 +1,5 @@
 package com.example.admin.goparty.views.activity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -8,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.admin.goparty.R;
+import com.example.admin.goparty.common.MyApplication;
 import com.example.admin.goparty.data.SqLiteDbHelper;
 import com.example.admin.goparty.presenters.PartyPresenter;
 import com.example.admin.goparty.views.fragment.AddPartyFragment;
@@ -17,11 +19,13 @@ import com.example.admin.goparty.views.fragment.PartyListFragment;
  * Created by Admin on 4/12/2016.
  */
 public class PartyActivity extends AppCompatActivity {
-    private SqLiteDbHelper sqlDb;
-    PartyPresenter partyPresenter;
+
+    MyApplication myApplication;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        myApplication = (MyApplication) getApplicationContext();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.party_activity_main);
 
@@ -56,7 +60,7 @@ public class PartyActivity extends AppCompatActivity {
                     .addToBackStack(null)
                     .commit();
             return true;
-        }else if (id == R.id.action_list_all_parties) {
+        } else if (id == R.id.action_list_all_parties) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
                     .setCustomAnimations(R.anim.enter_anim, R.anim.exit_anim)
@@ -64,9 +68,8 @@ public class PartyActivity extends AppCompatActivity {
                     .addToBackStack(null)
                     .commit();
             return true;
-        }else if (id == R.id.action_logout) {
-            sqlDb = new SqLiteDbHelper(this);
-            sqlDb.deleteContact();
+        } else if (id == R.id.action_logout) {
+            myApplication.getSqlDb().deleteContact();
 
             Intent intent = new Intent(this, UserActivity.class);
             startActivity(intent);

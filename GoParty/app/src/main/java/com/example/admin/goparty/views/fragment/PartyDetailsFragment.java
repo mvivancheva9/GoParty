@@ -14,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.admin.goparty.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -33,6 +32,7 @@ import butterknife.OnClick;
 
 public class PartyDetailsFragment extends Fragment implements OnMapReadyCallback {
 
+    private static LatLng partyLocation;
     @Bind(R.id.outputTitle)
     TextView outputTitle;
     @Bind(R.id.outputDuration)
@@ -40,13 +40,12 @@ public class PartyDetailsFragment extends Fragment implements OnMapReadyCallback
     Context context;
     @Bind(R.id.btn_add_to_calendar)
     AppCompatButton btnAddToCalendar;
-    private GoogleMap mMap;
-    private SupportMapFragment fragment;
     Double latitude;
     Double longitude;
     String title;
     String duration;
-    private static LatLng partyLocation;
+    private GoogleMap mMap;
+    private SupportMapFragment fragment;
 
 
     public PartyDetailsFragment() {
@@ -62,7 +61,7 @@ public class PartyDetailsFragment extends Fragment implements OnMapReadyCallback
         latitude = getArguments().getDouble("latitude");
         longitude = getArguments().getDouble("longitude");
 
-        partyLocation = new LatLng(latitude,longitude);
+        partyLocation = new LatLng(latitude, longitude);
     }
 
     @Override
@@ -124,7 +123,7 @@ public class PartyDetailsFragment extends Fragment implements OnMapReadyCallback
 
     @OnClick(R.id.btn_add_to_calendar)
     public void onClick() {
-          Location myAddress = new Location("location");
+        Location myAddress = new Location("location");
         myAddress.setLatitude(latitude);
         myAddress.setLongitude(longitude);
 

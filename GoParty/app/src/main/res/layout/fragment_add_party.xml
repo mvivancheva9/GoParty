@@ -1,43 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:layout_height="fill_parent">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/add_party_view"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:fitsSystemWindows="true"
-        android:background="#CCFFFFFF"
         android:layout_margin="20dp"
+        android:background="#CCFFFFFF"
+        android:fitsSystemWindows="true"
         android:orientation="vertical"
         android:paddingLeft="24dp"
-        android:paddingRight="24dp"
-        android:id="@+id/add_party_view">
+        android:paddingRight="24dp">
 
         <ImageView
-            android:src="@drawable/logo"
+            android:id="@+id/logo_image"
             android:layout_width="wrap_content"
             android:layout_height="200dp"
             android:layout_gravity="center_horizontal"
-            android:id="@+id/logo_image"/>
+            android:src="@drawable/logo" />
 
         <TextView
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_gravity="center_horizontal"
             android:text="Add Party"
-            android:id="@+id/textView"
-            android:layout_gravity="center_horizontal" />
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <!-- Title Label -->
         <android.support.design.widget.TextInputLayout
             android:id="@+id/title_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp">
-            <EditText android:id="@+id/input_title"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp">
+
+            <EditText
+                android:id="@+id/input_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/title"
@@ -49,20 +51,22 @@
             android:id="@+id/duration_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp">
-            <EditText android:id="@+id/input_duration"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp">
+
+            <EditText
+                android:id="@+id/input_duration"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"
                 android:hint="@string/duration"
-                android:textColor="@android:color/black"/>
+                android:inputType="number"
+                android:textColor="@android:color/black" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_add_location"
-            android:text="@string/addLocation"
-            style="@style/Button"/>
+            style="@style/Button"
+            android:text="@string/addLocation" />
     </LinearLayout>
 </ScrollView>
 

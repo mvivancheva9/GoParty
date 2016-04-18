@@ -1,13 +1,10 @@
 package com.example.admin.goparty.presenters;
 
-import android.database.Observable;
-
+import com.example.admin.goparty.common.MyApplication;
 import com.example.admin.goparty.models.LoginUserResponseModel;
 import com.example.admin.goparty.models.Party;
 import com.example.admin.goparty.models.PartyRequestModel;
 import com.example.admin.goparty.models.RequestRegisterUserModel;
-import com.example.admin.goparty.models.ResponsePartyListModel;
-import com.google.gson.JsonObject;
 
 import java.util.List;
 
@@ -18,21 +15,14 @@ import retrofit.http.Body;
 import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
-import retrofit.http.Header;
-import retrofit.http.Headers;
 import retrofit.http.POST;
 import retrofit.http.Path;
 
 public interface ApiInterface {
 
-    static String url = "http://goparty.azurewebsites.net";
+    MyApplication myApplication = MyApplication.getInstance();
 
-    Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl(url)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
-
-    ApiInterface service = ApiInterface.retrofit.create(ApiInterface.class);
+    ApiInterface service = myApplication.getRetrofit().create(ApiInterface.class);
 
     @POST("/api/Account/Register")
     Call<Void> addUser(@Body RequestRegisterUserModel userToRegister);

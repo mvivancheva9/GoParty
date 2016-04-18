@@ -3,7 +3,6 @@ package com.example.admin.goparty.data;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -17,8 +16,7 @@ public class SqLiteDbHelper extends SQLiteOpenHelper {
     public static final String USERINFO_COLUMN_TOKEN = "token";
     private HashMap hp;
 
-    public SqLiteDbHelper(Context context)
-    {
+    public SqLiteDbHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
     }
 
@@ -38,8 +36,7 @@ public class SqLiteDbHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertUser  (String token, String email)
-    {
+    public boolean insertUser(String token, String email) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("token", token);
@@ -48,28 +45,26 @@ public class SqLiteDbHelper extends SQLiteOpenHelper {
         return true;
     }
 
-    public Cursor getData(int id){
+    public Cursor getData(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select * from users where id="+id+"", null );
+        Cursor res = db.rawQuery("select * from users where id=" + id + "", null);
         return res;
     }
 
-    public void deleteContact()
-    {
+    public void deleteContact() {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(USERINFO_TABLE_NAME, null, null);
     }
 
-    public ArrayList<String> getAllUsers()
-    {
+    public ArrayList<String> getAllUsers() {
         ArrayList<String> array_list = new ArrayList<String>();
 
         //hp = new HashMap();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select * from users", null );
+        Cursor res = db.rawQuery("select * from users", null);
         res.moveToFirst();
 
-        while(res.isAfterLast() == false){
+        while (res.isAfterLast() == false) {
             array_list.add(res.getString(res.getColumnIndex(USERINFO_COLUMN_TOKEN)));
             res.moveToNext();
         }

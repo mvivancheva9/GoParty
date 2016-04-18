@@ -8,31 +8,31 @@ import android.support.v7.widget.Toolbar;
 
 import com.crashlytics.android.Crashlytics;
 import com.example.admin.goparty.R;
+import com.example.admin.goparty.common.MyApplication;
 import com.example.admin.goparty.data.SqLiteDbHelper;
 import com.example.admin.goparty.presenters.PartyPresenter;
 import com.example.admin.goparty.views.fragment.LoginUserFragment;
 
-import io.fabric.sdk.android.Fabric;
 import java.util.List;
 
+import io.fabric.sdk.android.Fabric;
+
 public class UserActivity extends AppCompatActivity {
-    private SqLiteDbHelper sqlDb;
-    private PartyPresenter partyPresenter;
+
+    MyApplication myApplication;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        sqlDb = new SqLiteDbHelper(this);
+        myApplication = (MyApplication) getApplicationContext();
 
-        partyPresenter = new PartyPresenter();
-        List<String> list = sqlDb.getAllUsers();
+        List<String> list = myApplication.getSqlDb().getAllUsers();
         super.onCreate(savedInstanceState);
 
-        if(!list.isEmpty()){
+        if (!list.isEmpty()) {
             Intent intent = new Intent(this, PartyActivity.class);
             startActivity(intent);
-        }
-        else {
+        } else {
             Fabric.with(this, new Crashlytics());
             setContentView(R.layout.user_activity_main);
             FragmentManager fragmentManager = getSupportFragmentManager();

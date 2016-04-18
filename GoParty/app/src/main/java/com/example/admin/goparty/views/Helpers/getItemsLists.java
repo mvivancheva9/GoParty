@@ -10,9 +10,10 @@ import java.util.ArrayList;
 /**
  * Created by Admin on 4/15/2016.
  */
-public class getItemsLists extends
+public class GetItemsLists extends
         AsyncTask<Void, String, ArrayList<Party>> {
     private PartyPresenter partyPresenter = new PartyPresenter();
+
     @Override
     protected void onPreExecute() {
         super.onPreExecute();

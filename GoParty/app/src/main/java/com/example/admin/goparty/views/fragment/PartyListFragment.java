@@ -72,6 +72,7 @@ public class PartyListFragment extends ListFragment {
 
         getFragmentManager().beginTransaction()
                 .replace(R.id.party_content_main, partyDetailsFragment)
+                .addToBackStack(null)
                 .commit();
     }
 }

@@ -108,6 +108,7 @@ public class LoginUserFragment extends Fragment implements View.OnTouchListener 
                             toast.show();
 
                             intent = new Intent(getActivity(), PartyActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
                         } else {
                             text = "Email ot password doesn't match";
@@ -122,7 +123,7 @@ public class LoginUserFragment extends Fragment implements View.OnTouchListener 
                             .beginTransaction()
                             .setCustomAnimations(R.anim.enter_anim, R.anim.exit_anim)
                             .replace(R.id.user_content_main, new RegisterNewUserFragment())
-                            .addToBackStack("register")
+                            .addToBackStack(null)
                             .commit();
                     break;
             }

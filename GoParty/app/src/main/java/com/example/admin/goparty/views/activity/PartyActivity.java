@@ -53,6 +53,7 @@ public class PartyActivity extends AppCompatActivity {
             fragmentManager.beginTransaction()
                     .setCustomAnimations(R.anim.enter_anim, R.anim.exit_anim)
                     .replace(R.id.party_content_main, new AddPartyFragment())
+                    .addToBackStack(null)
                     .commit();
             return true;
         }else if (id == R.id.action_list_all_parties) {
@@ -60,6 +61,7 @@ public class PartyActivity extends AppCompatActivity {
             fragmentManager.beginTransaction()
                     .setCustomAnimations(R.anim.enter_anim, R.anim.exit_anim)
                     .replace(R.id.party_content_main, new PartyListFragment())
+                    .addToBackStack(null)
                     .commit();
             return true;
         }else if (id == R.id.action_logout) {

@@ -8,8 +8,8 @@ import android.widget.ListView;
 
 import com.example.admin.goparty.R;
 import com.example.admin.goparty.models.Party;
-import com.example.admin.goparty.views.adapter.ListDemoAdapter;
 import com.example.admin.goparty.views.Helpers.GetItemsLists;
+import com.example.admin.goparty.views.adapter.ListDemoAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

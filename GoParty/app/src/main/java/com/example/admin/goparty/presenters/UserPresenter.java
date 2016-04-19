@@ -3,18 +3,13 @@ package com.example.admin.goparty.presenters;
 import android.content.Context;
 
 import com.example.admin.goparty.common.MyApplication;
-import com.example.admin.goparty.data.SqLiteDbHelper;
 import com.example.admin.goparty.models.LoginUserResponseModel;
 import com.example.admin.goparty.models.RequestRegisterUserModel;
 import com.example.admin.goparty.models.User;
 
 import java.io.IOException;
 
-import retrofit.GsonConverterFactory;
-import retrofit.Retrofit;
 import retrofit.Call;
-import retrofit.Callback;
-import retrofit.Response;
 
 public class UserPresenter {
 
@@ -22,7 +17,7 @@ public class UserPresenter {
 
     MyApplication myApplication = MyApplication.getInstance();
 
-    public String registerUser(final User user){
+    public String registerUser(final User user) {
 
         RequestRegisterUserModel requestRegisterUserModel = new RequestRegisterUserModel(user.getEmail(), user.getPassword(), user.getPassword());
 
@@ -38,7 +33,7 @@ public class UserPresenter {
         return responseMessage;
     }
 
-    public String loginUser(User user, Context context){
+    public String loginUser(User user, Context context) {
 
         Call<LoginUserResponseModel> call = ApiInterface.service.loginUser(user.getEmail(), user.getPassword(), "password", user.getEmail());
 
@@ -51,8 +46,7 @@ public class UserPresenter {
                 myApplication.getSqlDb().deleteContact();
                 myApplication.getSqlDb().insertUser(token, userName);
                 responseMessage = "Success";
-            }
-            else{
+            } else {
                 responseMessage = "The user name or password is incorrect.";
             }
         } catch (IOException e) {

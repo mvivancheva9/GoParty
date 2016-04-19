@@ -19,8 +19,8 @@ import com.example.admin.goparty.R;
 import com.example.admin.goparty.models.User;
 import com.example.admin.goparty.presenters.PartyPresenter;
 import com.example.admin.goparty.presenters.UserPresenter;
-import com.example.admin.goparty.views.activity.PartyActivity;
 import com.example.admin.goparty.views.Helpers.LoginUser;
+import com.example.admin.goparty.views.activity.PartyActivity;
 
 import java.util.concurrent.ExecutionException;
 

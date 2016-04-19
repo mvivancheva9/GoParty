@@ -12,7 +12,6 @@ import android.widget.Toast;
 import com.example.admin.goparty.R;
 import com.example.admin.goparty.common.MyApplication;
 import com.example.admin.goparty.models.Party;
-import com.example.admin.goparty.presenters.PartyPresenter;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -30,8 +29,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     AppCompatButton btnAddLocation;
     LatLng tappedPoint;
     Party party;
-    private GoogleMap mMap;
     MyApplication myApplication;
+    private GoogleMap mMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

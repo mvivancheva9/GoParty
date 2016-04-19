@@ -1,8 +1,8 @@
 package com.example.admin.goparty.presenters;
+
 import android.content.Context;
 
 import com.example.admin.goparty.common.MyApplication;
-import com.example.admin.goparty.data.SqLiteDbHelper;
 import com.example.admin.goparty.models.Party;
 import com.example.admin.goparty.models.PartyRequestModel;
 import com.example.admin.goparty.models.PartyResponseModel;
@@ -19,18 +19,19 @@ public class PartyPresenter {
 
     List<Party> parties = new ArrayList<Party>();
     MyApplication myApplication = MyApplication.getInstance();
-    public List<Party> getAllParties(){
+
+    public List<Party> getAllParties() {
 
         Call<List<Party>> call = ApiInterface.service.getParties();
         try {
-            parties=call.execute().body();
+            parties = call.execute().body();
         } catch (IOException e) {
             e.printStackTrace();
         }
         return parties;
     }
 
-    public void getPartyById(int partyId){
+    public void getPartyById(int partyId) {
 
         Call<Party> call = ApiInterface.service.getParty(partyId);
 
@@ -51,10 +52,10 @@ public class PartyPresenter {
         });
     }
 
-    public void addParty(final Context context, Party party){
+    public void addParty(final Context context, Party party) {
         final String token;
 
-        List<String> list  = myApplication.getSqlDb(). getAllUsers();
+        List<String> list = myApplication.getSqlDb().getAllUsers();
 
 //        if (list.size() != 0) {
 //

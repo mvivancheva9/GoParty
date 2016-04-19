@@ -9,8 +9,6 @@ import com.example.admin.goparty.models.RequestRegisterUserModel;
 import java.util.List;
 
 import retrofit.Call;
-import retrofit.GsonConverterFactory;
-import retrofit.Retrofit;
 import retrofit.http.Body;
 import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;

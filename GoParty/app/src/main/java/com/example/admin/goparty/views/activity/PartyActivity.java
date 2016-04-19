@@ -10,8 +10,6 @@ import android.view.MenuItem;
 
 import com.example.admin.goparty.R;
 import com.example.admin.goparty.common.MyApplication;
-import com.example.admin.goparty.data.SqLiteDbHelper;
-import com.example.admin.goparty.presenters.PartyPresenter;
 import com.example.admin.goparty.views.fragment.AddPartyFragment;
 import com.example.admin.goparty.views.fragment.PartyListFragment;
 

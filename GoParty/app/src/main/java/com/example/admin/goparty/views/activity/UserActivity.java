@@ -9,8 +9,6 @@ import android.support.v7.widget.Toolbar;
 import com.crashlytics.android.Crashlytics;
 import com.example.admin.goparty.R;
 import com.example.admin.goparty.common.MyApplication;
-import com.example.admin.goparty.data.SqLiteDbHelper;
-import com.example.admin.goparty.presenters.PartyPresenter;
 import com.example.admin.goparty.views.fragment.LoginUserFragment;
 
 import java.util.List;
@@ -20,6 +18,12 @@ import io.fabric.sdk.android.Fabric;
 public class UserActivity extends AppCompatActivity {
 
     MyApplication myApplication;
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

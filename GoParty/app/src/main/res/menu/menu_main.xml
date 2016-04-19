@@ -10,6 +10,10 @@
         android:orderInCategory="100"
         android:title="@string/all_parties" />
     <item
+        android:id="@+id/action_my_parties"
+        android:orderInCategory="100"
+        android:title="My Parties" />
+    <item
         android:id="@+id/action_logout"
         android:orderInCategory="100"
         android:title="@string/action_settings" />

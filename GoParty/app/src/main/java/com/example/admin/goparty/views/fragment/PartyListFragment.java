@@ -3,13 +3,15 @@ package com.example.admin.goparty.views.fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.example.admin.goparty.R;
 import com.example.admin.goparty.models.Party;
 import com.example.admin.goparty.views.Helpers.GetItemsLists;
-import com.example.admin.goparty.views.adapter.ListDemoAdapter;
+import com.example.admin.goparty.views.adapter.PartyListAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +20,7 @@ import java.util.concurrent.ExecutionException;
 public class PartyListFragment extends ListFragment {
     Context context;
     private List<Party> partyArrayList;
-    private ListDemoAdapter listDemoAdapter;
+    private PartyListAdapter partyListAdapter;
 
     public PartyListFragment() {
 
@@ -42,15 +44,15 @@ public class PartyListFragment extends ListFragment {
             e.printStackTrace();
         }
 
-        listDemoAdapter = new ListDemoAdapter(context, partyArrayList);
-        setListAdapter(listDemoAdapter);
+        partyListAdapter = new PartyListAdapter(context, partyArrayList);
+        setListAdapter(partyListAdapter);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        // remove the dividers from the ListView of the ListFragment
-        getListView().setDivider(null);
+
+        getListView();
     }
 
     public void onListItemClick(ListView l, View v, int position, long id) {

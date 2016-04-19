@@ -50,8 +50,6 @@ public class LoginUserFragment extends Fragment implements View.OnTouchListener 
     Context context;
     User user;
     UserPresenter rp;
-    PartyPresenter partyPresenter = new PartyPresenter();
-
     String result = "";
 
     public LoginUserFragment() {

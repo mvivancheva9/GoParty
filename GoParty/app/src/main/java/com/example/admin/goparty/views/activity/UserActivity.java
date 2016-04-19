@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import com.crashlytics.android.Crashlytics;
 import com.example.admin.goparty.R;
 import com.example.admin.goparty.common.MyApplication;
+import com.example.admin.goparty.models.UserSqliteModel;
 import com.example.admin.goparty.views.fragment.LoginUserFragment;
 
 import java.util.List;
@@ -30,7 +31,7 @@ public class UserActivity extends AppCompatActivity {
 
         myApplication = (MyApplication) getApplicationContext();
 
-        List<String> list = myApplication.getSqlDb().getAllUsers();
+        List<UserSqliteModel> list = myApplication.getSqlDb().getAllUsers();
         super.onCreate(savedInstanceState);
 
         if (!list.isEmpty()) {

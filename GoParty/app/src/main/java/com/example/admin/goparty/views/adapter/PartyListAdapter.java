@@ -12,9 +12,9 @@ import com.example.admin.goparty.models.Party;
 
 import java.util.List;
 
-public class ListDemoAdapter extends ArrayAdapter<Party> {
+public class PartyListAdapter extends ArrayAdapter<Party> {
 
-    public ListDemoAdapter(Context context, List<Party> items) {
+    public PartyListAdapter(Context context, List<Party> items) {
         super(context, R.layout.party_list_row, items);
     }
 

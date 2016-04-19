@@ -6,6 +6,7 @@ import com.example.admin.goparty.common.MyApplication;
 import com.example.admin.goparty.models.Party;
 import com.example.admin.goparty.models.PartyRequestModel;
 import com.example.admin.goparty.models.PartyResponseModel;
+import com.example.admin.goparty.models.UserSqliteModel;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -55,7 +56,7 @@ public class PartyPresenter {
     public void addParty(final Context context, Party party) {
         final String token;
 
-        List<String> list = myApplication.getSqlDb().getAllUsers();
+        List<UserSqliteModel> list = myApplication.getSqlDb().getAllUsers();
 
 //        if (list.size() != 0) {
 //
@@ -91,7 +92,7 @@ public class PartyPresenter {
                 int code = response.code();
                 System.out.println("Response status code: " + response.code());
                 PartyResponseModel party = new PartyResponseModel(response.body().getLatitude(), response.body().getLongitude(), response.body().getTitle().toString(), response.body().getDuration());
-
+                myApplication.getSqlDb().insertParty(party.getTitle(), party.getDuration(), party.getLatitude(), party.getLongitude());
             }
 
             @Override

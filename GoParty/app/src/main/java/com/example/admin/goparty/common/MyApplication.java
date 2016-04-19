@@ -9,24 +9,24 @@ import com.example.admin.goparty.presenters.PartyPresenter;
 import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
 
-/**
- * Created by Admin on 4/18/2016.
- */
-public class MyApplication extends Application{
+public class MyApplication extends Application {
     private static MyApplication ourInstance;
     private static String url = "http://goparty.azurewebsites.net";
+    private Retrofit retrofit;
+    private SqLiteDbHelper sqlDb;
+    private PartyPresenter partyPresenter;
 
-    public ApiInterface getService() {
-        return service;
+    public MyApplication() {
     }
 
-    private ApiInterface service;
+    public static MyApplication getInstance() {
+
+        return ourInstance;
+    }
 
     public Retrofit getRetrofit() {
         return retrofit;
     }
-
-    private Retrofit retrofit;
 
     public SqLiteDbHelper getSqlDb() {
         return sqlDb;
@@ -36,21 +36,15 @@ public class MyApplication extends Application{
         return partyPresenter;
     }
 
-    private SqLiteDbHelper sqlDb;
-    private PartyPresenter partyPresenter;
-
-    public static MyApplication getInstance() {
-
-        return ourInstance;
-    }
-
-    public MyApplication() {
-    }
-
     @Override
     public void onCreate() {
         super.onCreate();
         ourInstance = this;
+
+        init();
+    }
+
+    private void init(){
         sqlDb = new SqLiteDbHelper(this);
 
         partyPresenter = new PartyPresenter();
@@ -59,7 +53,5 @@ public class MyApplication extends Application{
                 .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-
-        ApiInterface service = retrofit.create(ApiInterface.class);
     }
 }

@@ -8,8 +8,8 @@ import com.example.admin.goparty.presenters.UserPresenter;
 
 public class LoginUser extends
         AsyncTask<Void, String, String> {
-    private UserPresenter rp;
     private final User user;
+    private UserPresenter rp;
 
     @SuppressWarnings("unused")
     public LoginUser(Context context, User user) {

@@ -28,7 +28,7 @@ public class MyApplication extends Application {
         return ourInstance;
     }
 
-    public void initContext(Context context){
+    public void initContext(Context context) {
         Context mContext = context;
     }
 

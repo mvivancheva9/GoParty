@@ -12,7 +12,7 @@ public class UserSqliteModel {
         this.token = token;
     }
 
-    public UserSqliteModel(){
+    public UserSqliteModel() {
 
     }
 

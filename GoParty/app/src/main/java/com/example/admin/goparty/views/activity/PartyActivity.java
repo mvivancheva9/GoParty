@@ -70,7 +70,7 @@ public class PartyActivity extends AppCompatActivity {
             Intent intent = new Intent(this, UserActivity.class);
             startActivity(intent);
             return true;
-        }else if (id == R.id.action_my_parties) {
+        } else if (id == R.id.action_my_parties) {
             myApplication.getSqlDb().getAllPartiesForUser();
             return true;
         }

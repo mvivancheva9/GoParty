@@ -19,8 +19,8 @@ import retrofit.Response;
 @SuppressWarnings("ALL")
 public class PartyPresenter {
 
-    private List<Party> parties = new ArrayList<Party>();
     private final MyApplication myApplication = MyApplication.getInstance();
+    private List<Party> parties = new ArrayList<Party>();
 
     public List<Party> getAllParties() {
 

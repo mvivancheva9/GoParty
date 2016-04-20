@@ -11,9 +11,8 @@ import retrofit.Call;
 
 public class UserPresenter {
 
-    private String responseMessage = "";
-
     private final MyApplication myApplication = MyApplication.getInstance();
+    private String responseMessage = "";
 
     public String registerUser(final User user) {
 

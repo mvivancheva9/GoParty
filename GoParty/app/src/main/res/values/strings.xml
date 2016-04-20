@@ -16,7 +16,7 @@
     <string name="myParties">My Parties</string>
     <string name="duration">Duration</string>
     <string name="title_activity_maps">Map</string>
-    
+
     <string name="titleLabel">Title:</string>
     <string name="partyStartLabel">Party Start:</string>
     <string name="addToCalendar">Add To Calendar</string>

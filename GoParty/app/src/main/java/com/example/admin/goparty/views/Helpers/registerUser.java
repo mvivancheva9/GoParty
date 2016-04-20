@@ -12,8 +12,8 @@ import com.example.admin.goparty.presenters.UserPresenter;
 @SuppressWarnings("ALL")
 public class RegisterUser extends
         AsyncTask<Void, String, String> {
-    private UserPresenter rp;
     private final User user;
+    private UserPresenter rp;
 
     public RegisterUser(Context context, User user) {
         this.user = user;

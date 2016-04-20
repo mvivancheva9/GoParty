@@ -1,5 +1,4 @@
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
@@ -25,8 +24,8 @@
             android:id="@+id/outputTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingStart="50dp"
-            android:paddingEnd="50dp"/>
+            android:paddingEnd="50dp"
+            android:paddingStart="50dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -37,8 +36,8 @@
             android:id="@+id/outputDuration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingStart="50dp"
-            android:paddingEnd="50dp"/>
+            android:paddingEnd="50dp"
+            android:paddingStart="50dp" />
 
         <fragment xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/mapFragment"

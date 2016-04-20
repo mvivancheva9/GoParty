@@ -6,6 +6,7 @@ import java.util.Map;
 @SuppressWarnings("ALL")
 public class Party {
 
+    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
     private Integer Id;
     private Object Title;
     private Double Latitude;
@@ -13,7 +14,6 @@ public class Party {
     private Integer Duration;
     private String startDate;
     private String UserId;
-    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     /**
      * @return The Id

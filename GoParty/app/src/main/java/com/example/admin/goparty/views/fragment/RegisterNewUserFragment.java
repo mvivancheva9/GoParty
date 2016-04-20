@@ -47,9 +47,9 @@ public class RegisterNewUserFragment extends Fragment {
     TextInputLayout confirmPasswordContent;
     @Bind(R.id.btn_register)
     AppCompatButton btnRegister;
-    private Context context;
     PartyPresenter partyPresenter = new PartyPresenter();
     Intent intent;
+    private Context context;
 
     public RegisterNewUserFragment() {
         // Required empty public constructor

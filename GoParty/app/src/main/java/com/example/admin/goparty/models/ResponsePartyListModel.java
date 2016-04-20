@@ -3,8 +3,9 @@ package com.example.admin.goparty.models;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ResponsePartyListModel {
-    List<Party> partyList;
+@SuppressWarnings("ALL")
+class ResponsePartyListModel {
+    private List<Party> partyList;
 
 
     public List<Party> getPartyList() {

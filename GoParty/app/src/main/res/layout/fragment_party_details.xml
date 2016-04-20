@@ -6,7 +6,7 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:background="#CCFFFFFF"
         android:fitsSystemWindows="true"
@@ -19,24 +19,26 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Title:" />
+            android:text="@string/titleLabel" />
 
         <TextView
             android:id="@+id/outputTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="50dp" />
+            android:paddingStart="50dp"
+            android:paddingEnd="50dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Party Start:" />
+            android:text="@string/partyStartLabel" />
 
         <TextView
             android:id="@+id/outputDuration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="50dp" />
+            android:paddingStart="50dp"
+            android:paddingEnd="50dp"/>
 
         <fragment xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/mapFragment"
@@ -48,7 +50,7 @@
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_add_to_calendar"
             style="@style/Button"
-            android:text="Add To Calendar" />
+            android:text="@string/addToCalendar" />
 
     </LinearLayout>
 </ScrollView>

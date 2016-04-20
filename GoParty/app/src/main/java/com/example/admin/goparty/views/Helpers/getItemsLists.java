@@ -7,17 +7,9 @@ import com.example.admin.goparty.presenters.PartyPresenter;
 
 import java.util.ArrayList;
 
-/**
- * Created by Admin on 4/15/2016.
- */
 public class GetItemsLists extends
         AsyncTask<Void, String, ArrayList<Party>> {
-    private PartyPresenter partyPresenter = new PartyPresenter();
-
-    @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
-    }
+    private final PartyPresenter partyPresenter = new PartyPresenter();
 
     @Override
     protected void onProgressUpdate(String... values) {
@@ -26,8 +18,7 @@ public class GetItemsLists extends
 
     @Override
     protected ArrayList<Party> doInBackground(Void... params) {
-        ArrayList<Party> fal = (ArrayList<Party>) partyPresenter.getAllParties();
-        return fal;
+        return (ArrayList<Party>) partyPresenter.getAllParties();
     }
 
     @Override

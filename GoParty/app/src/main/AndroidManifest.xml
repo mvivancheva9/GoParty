@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.admin.goparty">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -8,11 +9,14 @@
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
 
     <application
+        android:fullBackupContent="true"
+        android:allowBackup="true"
         android:name="com.example.admin.goparty.common.MyApplication"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoActionBar">
+        android:theme="@style/AppTheme.NoActionBar"
+        tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".views.activity.UserActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -23,7 +27,7 @@
         </activity>
         <activity
             android:name=".views.activity.PartyActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -31,7 +35,7 @@
 
         <activity
             android:name=".views.activity.MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
+            android:label="@string/title_activity_maps"/>
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="4845d177b95df4cd644b1eb97327b270ee832341" />

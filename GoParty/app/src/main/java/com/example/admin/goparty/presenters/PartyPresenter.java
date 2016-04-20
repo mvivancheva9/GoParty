@@ -16,10 +16,11 @@ import retrofit.Call;
 import retrofit.Callback;
 import retrofit.Response;
 
+@SuppressWarnings("ALL")
 public class PartyPresenter {
 
-    List<Party> parties = new ArrayList<Party>();
-    MyApplication myApplication = MyApplication.getInstance();
+    private List<Party> parties = new ArrayList<Party>();
+    private final MyApplication myApplication = MyApplication.getInstance();
 
     public List<Party> getAllParties() {
 
@@ -83,7 +84,7 @@ public class PartyPresenter {
 //            }
 //        });
 
-        PartyRequestModel partyRequestModel = new PartyRequestModel(party.getLatitude(), party.getLongitude(), party.getTitle().toString(), party.getDuration());
+        PartyRequestModel partyRequestModel = new PartyRequestModel();
         Call<Party> call = ApiInterface.service.addParty(partyRequestModel);
 
         call.enqueue(new Callback<Party>() {

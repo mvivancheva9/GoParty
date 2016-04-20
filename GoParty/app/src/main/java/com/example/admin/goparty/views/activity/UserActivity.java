@@ -18,8 +18,6 @@ import io.fabric.sdk.android.Fabric;
 
 public class UserActivity extends AppCompatActivity {
 
-    MyApplication myApplication;
-
     @Override
     protected void onPause() {
         super.onPause();
@@ -29,7 +27,7 @@ public class UserActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        myApplication = MyApplication.getInstance();
+        MyApplication myApplication = MyApplication.getInstance();
         myApplication.initContext(this);
         List<UserSqliteModel> list = myApplication.getSqlDb().getAllUsers();
         super.onCreate(savedInstanceState);

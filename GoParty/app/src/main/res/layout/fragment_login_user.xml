@@ -2,19 +2,19 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="match_parent"
-    android:background="#CCFFFFFF">
+    android:layout_height="match_parent">
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
         android:orientation="vertical"
         android:paddingLeft="24dp"
         android:paddingRight="24dp">
 
         <ImageView
+            android:contentDescription="@string/logo"
             android:id="@+id/logo_image"
             android:layout_width="wrap_content"
             android:layout_height="150dp"
@@ -30,7 +30,7 @@
                 android:id="@+id/input_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email"
+                android:hint="@string/emailHint"
                 android:inputType="textEmailAddress"
                 android:textColor="@android:color/black" />
         </android.support.design.widget.TextInputLayout>
@@ -53,7 +53,7 @@
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_login"
             style="@style/Button"
-            android:text="Login" />
+            android:text="@string/login" />
 
         <TextView
             android:id="@+id/link_forgotten_password"
@@ -62,7 +62,7 @@
             android:gravity="center"
             android:text="@string/register"
             android:textColor="@color/colorAccent"
-            android:textSize="16dip" />
+            android:textSize="16sp" />
 
     </LinearLayout>
 </ScrollView>

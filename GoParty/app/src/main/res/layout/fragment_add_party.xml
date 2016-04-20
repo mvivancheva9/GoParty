@@ -7,7 +7,7 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/add_party_view"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:background="#CCFFFFFF"
         android:fitsSystemWindows="true"
@@ -16,6 +16,7 @@
         android:paddingRight="24dp">
 
         <ImageView
+            android:contentDescription="@string/logo"
             android:id="@+id/logo_image"
             android:layout_width="wrap_content"
             android:layout_height="200dp"
@@ -27,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="Add Party"
+            android:text="@string/addParty"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <!-- Title Label -->

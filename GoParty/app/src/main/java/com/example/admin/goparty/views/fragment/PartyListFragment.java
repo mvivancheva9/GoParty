@@ -3,9 +3,7 @@ package com.example.admin.goparty.views.fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.example.admin.goparty.R;
@@ -18,9 +16,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class PartyListFragment extends ListFragment {
-    Context context;
     private List<Party> partyArrayList;
-    private PartyListAdapter partyListAdapter;
 
     public PartyListFragment() {
 
@@ -29,22 +25,20 @@ public class PartyListFragment extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        context = getActivity();
+        Context context = getActivity();
 
-        partyArrayList = new ArrayList<Party>();
+        partyArrayList = new ArrayList<>();
 
         GetItemsLists gfl = new GetItemsLists();
         gfl.execute();
 
         try {
             partyArrayList = gfl.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
+        } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
 
-        partyListAdapter = new PartyListAdapter(context, partyArrayList);
+        PartyListAdapter partyListAdapter = new PartyListAdapter(context, partyArrayList);
         setListAdapter(partyListAdapter);
     }
 

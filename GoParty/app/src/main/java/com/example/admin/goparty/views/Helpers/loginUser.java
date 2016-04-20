@@ -1,9 +1,5 @@
 package com.example.admin.goparty.views.Helpers;
 
-/**
- * Created by Admin on 4/15/2016.
- */
-
 import android.content.Context;
 import android.os.AsyncTask;
 
@@ -12,13 +8,12 @@ import com.example.admin.goparty.presenters.UserPresenter;
 
 public class LoginUser extends
         AsyncTask<Void, String, String> {
-    UserPresenter rp;
-    Context context;
-    private User user;
+    private UserPresenter rp;
+    private final User user;
 
+    @SuppressWarnings("unused")
     public LoginUser(Context context, User user) {
         this.user = user;
-        this.context = context;
     }
 
     @Override
@@ -34,8 +29,7 @@ public class LoginUser extends
 
     @Override
     protected String doInBackground(Void... params) {
-        String result = rp.loginUser(user, context);
-        return result;
+        return rp.loginUser(user);
     }
 
     @Override

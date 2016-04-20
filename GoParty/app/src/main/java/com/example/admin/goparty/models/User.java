@@ -11,6 +11,7 @@ public class User {
         this.email = email;
     }
 
+    @SuppressWarnings("unused")
     public String getUsername() {
         return username;
     }

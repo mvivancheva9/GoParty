@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.AppCompatButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,22 +29,21 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+@SuppressWarnings("ALL")
 public class PartyDetailsFragment extends Fragment implements OnMapReadyCallback {
 
     private static LatLng partyLocation;
+    @SuppressWarnings("WeakerAccess")
     @Bind(R.id.outputTitle)
     TextView outputTitle;
+    @SuppressWarnings("WeakerAccess")
     @Bind(R.id.outputDuration)
     TextView outputDuration;
-    Context context;
-    @Bind(R.id.btn_add_to_calendar)
-    AppCompatButton btnAddToCalendar;
-    Double latitude;
-    Double longitude;
-    String title;
-    String duration;
-    private GoogleMap mMap;
-    private SupportMapFragment fragment;
+    private Context context;
+    private Double latitude;
+    private Double longitude;
+    private String title;
+    private String duration;
 
 
     public PartyDetailsFragment() {
@@ -77,7 +75,7 @@ public class PartyDetailsFragment extends Fragment implements OnMapReadyCallback
         outputDuration.setText(duration);
 
         FragmentManager fm = getChildFragmentManager();
-        fragment = (SupportMapFragment) fm.findFragmentById(R.id.mapFragment);
+        SupportMapFragment fragment = (SupportMapFragment) fm.findFragmentById(R.id.mapFragment);
         fragment.getMapAsync(this);
 
         return view;
@@ -92,7 +90,6 @@ public class PartyDetailsFragment extends Fragment implements OnMapReadyCallback
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
 
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -104,7 +101,7 @@ public class PartyDetailsFragment extends Fragment implements OnMapReadyCallback
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
-        mMap.setMyLocationEnabled(true);
+        googleMap.setMyLocationEnabled(true);
 
         GoogleMapOptions options = new GoogleMapOptions();
 
@@ -114,11 +111,11 @@ public class PartyDetailsFragment extends Fragment implements OnMapReadyCallback
                 .tiltGesturesEnabled(true)
                 .ambientEnabled(true);
 
-        mMap.addMarker(new MarkerOptions()
+        googleMap.addMarker(new MarkerOptions()
                 .position(new LatLng(latitude, longitude))
                 .title("Party Here"));
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(partyLocation, 15));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(partyLocation, 15));
     }
 
     @OnClick(R.id.btn_add_to_calendar)

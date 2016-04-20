@@ -30,7 +30,7 @@ public interface ApiInterface {
     Call<LoginUserResponseModel> loginUser(
             @Field("email") String email,
             @Field("password") String password,
-            @Field("Grant_type") String grantype,
+            @SuppressWarnings("SameParameterValue") @Field("Grant_type") String grantType,
             @Field("userName") String userName);
 
     @GET("/api/Parties")

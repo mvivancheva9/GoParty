@@ -3,6 +3,7 @@ package com.example.admin.goparty.models;
 import java.util.HashMap;
 import java.util.Map;
 
+@SuppressWarnings("ALL")
 public class Party {
 
     private Integer Id;
@@ -12,7 +13,7 @@ public class Party {
     private Integer Duration;
     private String startDate;
     private String UserId;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     /**
      * @return The Id

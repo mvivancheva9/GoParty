@@ -1,7 +1,5 @@
 package com.example.admin.goparty.presenters;
 
-import android.content.Context;
-
 import com.example.admin.goparty.common.MyApplication;
 import com.example.admin.goparty.models.LoginUserResponseModel;
 import com.example.admin.goparty.models.RequestRegisterUserModel;
@@ -13,9 +11,9 @@ import retrofit.Call;
 
 public class UserPresenter {
 
-    String responseMessage = "";
+    private String responseMessage = "";
 
-    MyApplication myApplication = MyApplication.getInstance();
+    private final MyApplication myApplication = MyApplication.getInstance();
 
     public String registerUser(final User user) {
 
@@ -24,7 +22,7 @@ public class UserPresenter {
         Call<Void> call = ApiInterface.service.addUser(requestRegisterUserModel);
 
         try {
-            Void response = call.execute().body();
+            call.execute().body();
             responseMessage = "Success";
         } catch (IOException e) {
             e.printStackTrace();
@@ -33,7 +31,7 @@ public class UserPresenter {
         return responseMessage;
     }
 
-    public String loginUser(User user, Context context) {
+    public String loginUser(User user) {
 
         Call<LoginUserResponseModel> call = ApiInterface.service.loginUser(user.getEmail(), user.getPassword(), "password", user.getEmail());
 

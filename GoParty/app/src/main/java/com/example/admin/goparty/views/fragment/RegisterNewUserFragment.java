@@ -28,39 +28,31 @@ import butterknife.OnClick;
 /**
  * A simple {@link Fragment} subclass.
  */
+@SuppressWarnings("ALL")
 public class RegisterNewUserFragment extends Fragment {
+    @SuppressWarnings("WeakerAccess")
     @Bind(R.id.input_username)
     EditText inputUsername;
     @Bind(R.id.username_content)
     TextInputLayout usernameContent;
+    @SuppressWarnings("WeakerAccess")
     @Bind(R.id.input_password)
     EditText inputPassword;
     @Bind(R.id.password_content)
     TextInputLayout passwordContent;
+    @SuppressWarnings("WeakerAccess")
     @Bind(R.id.input_confirm_password)
     EditText inputConfirmPassword;
     @Bind(R.id.confirm_password_content)
     TextInputLayout confirmPasswordContent;
     @Bind(R.id.btn_register)
     AppCompatButton btnRegister;
-    Context context;
-    User user;
-    UserPresenter rp;
+    private Context context;
     PartyPresenter partyPresenter = new PartyPresenter();
-    int duration;
-    Toast toast;
     Intent intent;
-    CharSequence text;
-    String result;
 
     public RegisterNewUserFragment() {
         // Required empty public constructor
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -70,7 +62,7 @@ public class RegisterNewUserFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_register_new_user, container, false);
         ButterKnife.bind(this, view);
         context = inflater.getContext();
-        rp = new UserPresenter();
+        UserPresenter rp = new UserPresenter();
         return view;
     }
 
@@ -83,6 +75,9 @@ public class RegisterNewUserFragment extends Fragment {
 
     @OnClick(R.id.btn_register)
     public void onClick() {
+        int duration;
+        Toast toast1;
+        CharSequence text1;
         if (inputUsername.getText().toString().trim().isEmpty() || inputPassword.getText().toString().trim().isEmpty()
                 || inputConfirmPassword.getText().toString().trim().isEmpty()) {
             CharSequence text = "All fields are required";
@@ -90,21 +85,21 @@ public class RegisterNewUserFragment extends Fragment {
             Toast toast = Toast.makeText(context, text, durationLength);
             toast.show();
         } else if (!inputPassword.getText().toString().equals(inputConfirmPassword.getText().toString())) {
-            text = "Passwords does not match";
+            text1 = "Passwords does not match";
 
             duration = Toast.LENGTH_LONG;
 
-            toast = Toast.makeText(context, text, duration);
-            toast.show();
+            toast1 = Toast.makeText(context, text1, duration);
+            toast1.show();
         } else {
-            text = "User Successfully Registered!";
+            text1 = "User Successfully Registered!";
 
             duration = Toast.LENGTH_LONG;
 
-            user = new User(inputUsername.getText().toString(), inputPassword.getText().toString(), inputUsername.getText().toString());
+            User user = new User(inputUsername.getText().toString(), inputPassword.getText().toString(), inputUsername.getText().toString());
 
-            toast = Toast.makeText(context, text, duration);
-            toast.show();
+            toast1 = Toast.makeText(context, text1, duration);
+            toast1.show();
 
             getFragmentManager()
                     .beginTransaction()
@@ -117,7 +112,7 @@ public class RegisterNewUserFragment extends Fragment {
             RegisterUser.execute();
 
             try {
-                result = RegisterUser.get();
+                String result = RegisterUser.get();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } catch (ExecutionException e) {

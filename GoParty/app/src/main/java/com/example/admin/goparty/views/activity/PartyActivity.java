@@ -13,12 +13,9 @@ import com.example.admin.goparty.common.MyApplication;
 import com.example.admin.goparty.views.fragment.AddPartyFragment;
 import com.example.admin.goparty.views.fragment.PartyListFragment;
 
-/**
- * Created by Admin on 4/12/2016.
- */
 public class PartyActivity extends AppCompatActivity {
 
-    MyApplication myApplication;
+    private MyApplication myApplication;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

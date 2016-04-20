@@ -3,8 +3,8 @@
     <string name="action_settings">Logout</string>
     <string name="all_parties">All Parties</string>
 
-    <string name="username">Username</string>
     <string name="password">Password</string>
+    <string name="emailHint">Email</string>
     <string name="confirmPassword">Confirm Password</string>
     <string name="login">Login</string>
     <string name="register">REGISTER</string>
@@ -12,9 +12,15 @@
     <string name="title">Title</string>
     <string name="addLocation">Add Location</string>
     <string name="addParty">Add Party</string>
+    <string name="addUser">Add User</string>
+    <string name="myParties">My Parties</string>
     <string name="duration">Duration</string>
     <string name="title_activity_maps">Map</string>
+    
+    <string name="titleLabel">Title:</string>
+    <string name="partyStartLabel">Party Start:</string>
+    <string name="addToCalendar">Add To Calendar</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="noTitle">No Title</string>
+    <string name="logo">Logo</string>
 </resources>

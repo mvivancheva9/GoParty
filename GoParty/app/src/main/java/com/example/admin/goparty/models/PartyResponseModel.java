@@ -15,10 +15,10 @@ public class PartyResponseModel implements Parcelable {
             return new PartyResponseModel[size];
         }
     };
-    private Double latitude;
-    private Double longitude;
-    private Integer duration;
-    private String title;
+    private final Double latitude;
+    private final Double longitude;
+    private final Integer duration;
+    private final String title;
 
     public PartyResponseModel(Double latitude, Double longitude, String title, Integer duration) {
         this.latitude = latitude;
@@ -27,6 +27,7 @@ public class PartyResponseModel implements Parcelable {
         this.duration = duration;
     }
 
+    @SuppressWarnings("WeakerAccess")
     protected PartyResponseModel(Parcel in) {
         this.latitude = (Double) in.readValue(Double.class.getClassLoader());
         this.longitude = (Double) in.readValue(Double.class.getClassLoader());
@@ -38,32 +39,16 @@ public class PartyResponseModel implements Parcelable {
         return latitude;
     }
 
-    public void setLatitude(Double latitude) {
-        this.latitude = latitude;
-    }
-
     public Double getLongitude() {
         return longitude;
-    }
-
-    public void setLongitude(Double longitude) {
-        this.longitude = longitude;
     }
 
     public Integer getDuration() {
         return duration;
     }
 
-    public void setDuration(Integer duration) {
-        this.duration = duration;
-    }
-
     public String getTitle() {
         return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     @Override

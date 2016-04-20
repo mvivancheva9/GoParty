@@ -6,7 +6,6 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.widget.AppCompatButton;
 import android.widget.Toast;
 
 import com.example.admin.goparty.R;
@@ -19,17 +18,14 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
-    @Bind(R.id.btn_add_location)
-    AppCompatButton btnAddLocation;
-    LatLng tappedPoint;
-    Party party;
-    MyApplication myApplication;
+    private LatLng tappedPoint;
+    private Party party;
+    private MyApplication myApplication;
     private GoogleMap mMap;
 
     @Override
@@ -98,6 +94,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
     }
 
+    @SuppressWarnings("unused")
     @OnClick(R.id.btn_add_location)
     public void onClick() {
         if (tappedPoint != null) {

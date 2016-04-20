@@ -9,14 +9,14 @@ import com.example.admin.goparty.presenters.PartyPresenter;
 import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
 
+@SuppressWarnings("ALL")
 public class MyApplication extends Application {
     private static MyApplication ourInstance = null;
-    private static String url = "http://goparty.azurewebsites.net";
     private Retrofit retrofit;
     private SqLiteDbHelper sqlDb;
     private PartyPresenter partyPresenter;
-    private static Context context;
 
+    @SuppressWarnings("WeakerAccess")
     protected MyApplication() {
     }
 
@@ -29,7 +29,7 @@ public class MyApplication extends Application {
     }
 
     public void initContext(Context context){
-        context = context;
+        Context mContext = context;
     }
 
     public Retrofit getRetrofit() {
@@ -57,6 +57,7 @@ public class MyApplication extends Application {
 
         partyPresenter = new PartyPresenter();
 
+        String url = "http://goparty.azurewebsites.net";
         retrofit = new Retrofit.Builder()
                 .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())

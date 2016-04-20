@@ -1,5 +1,6 @@
 package com.example.admin.goparty.models;
 
+@SuppressWarnings("unused")
 public class UserSqliteModel {
     private Integer id;
     private String username;

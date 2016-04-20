@@ -39,7 +39,7 @@ public class PartyListAdapter extends ArrayAdapter<Party> {
         // update the item view
         Party item = getItem(position);
         if (item.getTitle() == null) {
-            viewHolder.tvTitle.setText("No Title");
+            viewHolder.tvTitle.setText(R.string.noTitle);
 
         } else {
             viewHolder.tvTitle.setText(item.getTitle().toString());

@@ -84,7 +84,7 @@ public class PartyPresenter {
 //            }
 //        });
 
-        PartyRequestModel partyRequestModel = new PartyRequestModel();
+        PartyRequestModel partyRequestModel = new PartyRequestModel(party.getLatitude(), party.getLongitude(), party.getTitle().toString(), party.getDuration());
         Call<Party> call = ApiInterface.service.addParty(partyRequestModel);
 
         call.enqueue(new Callback<Party>() {

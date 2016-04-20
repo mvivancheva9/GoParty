@@ -17,7 +17,7 @@ public class MyApplication extends Application {
     private PartyPresenter partyPresenter;
 
     @SuppressWarnings("WeakerAccess")
-    protected MyApplication() {
+    public MyApplication() {
     }
 
     public synchronized static MyApplication getInstance() {

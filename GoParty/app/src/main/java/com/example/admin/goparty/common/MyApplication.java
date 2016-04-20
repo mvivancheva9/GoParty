@@ -1,6 +1,7 @@
 package com.example.admin.goparty.common;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.example.admin.goparty.data.SqLiteDbHelper;
 import com.example.admin.goparty.presenters.PartyPresenter;
@@ -14,6 +15,7 @@ public class MyApplication extends Application {
     private Retrofit retrofit;
     private SqLiteDbHelper sqlDb;
     private PartyPresenter partyPresenter;
+    private static Context context;
 
     protected MyApplication() {
     }
@@ -24,6 +26,10 @@ public class MyApplication extends Application {
             ourInstance = new MyApplication();
         }
         return ourInstance;
+    }
+
+    public void initContext(Context context){
+        context = context;
     }
 
     public Retrofit getRetrofit() {

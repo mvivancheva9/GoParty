@@ -23,7 +23,8 @@ public class PartyActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        myApplication = (MyApplication) getApplicationContext();
+        myApplication = MyApplication.getInstance();
+        myApplication.initContext(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.party_activity_main);
 

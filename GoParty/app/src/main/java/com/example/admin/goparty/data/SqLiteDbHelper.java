@@ -32,9 +32,6 @@ public class SqLiteDbHelper extends SQLiteOpenHelper {
     public static final String USER_PARTY_TABLE_NAME = "userParty";
     public static final String USER_PARTY_COLUMN_USERID = "userId";
     public static final String USER_PARTY_COLUMN_PARTYID = "partyId";
-
-    private static long userForPartyId;
-
     private static final String KEY_ID = "id";
     private static final String CREATE_TABLE_USER = "CREATE TABLE "
             + USERINFO_TABLE_NAME + "(" + KEY_ID + " INTEGER PRIMARY KEY," + USERS_COLUMN_TOKEN
@@ -48,6 +45,7 @@ public class SqLiteDbHelper extends SQLiteOpenHelper {
     private static final String CREATE_TABLE_PARTY_USER = "CREATE TABLE "
             + USER_PARTY_TABLE_NAME + "(" + KEY_ID + " INTEGER PRIMARY KEY," + USER_PARTY_COLUMN_USERID
             + " INTEGER," + USER_PARTY_COLUMN_PARTYID + " INTEGER" + ")";
+    private static long userForPartyId;
     private HashMap hp;
 
     public SqLiteDbHelper(Context context) {
@@ -161,7 +159,7 @@ public class SqLiteDbHelper extends SQLiteOpenHelper {
 
     public long insertUserForParty(String email) {
         UserSqliteModel user = getUserByUsername(email);
-        if(user.getUsername() == null) {
+        if (user.getUsername() == null) {
             SQLiteDatabase db = this.getWritableDatabase();
             ContentValues contentValues = new ContentValues();
             contentValues.put("username", email);

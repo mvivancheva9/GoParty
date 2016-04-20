@@ -35,7 +35,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        myApplication = (MyApplication) getApplicationContext();
+        myApplication = MyApplication.getInstance();
+        myApplication.initContext(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps2);
         ButterKnife.bind(this);

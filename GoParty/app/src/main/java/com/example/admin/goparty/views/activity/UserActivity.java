@@ -29,8 +29,8 @@ public class UserActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        myApplication = (MyApplication) getApplicationContext();
-
+        myApplication = MyApplication.getInstance();
+        myApplication.initContext(this);
         List<UserSqliteModel> list = myApplication.getSqlDb().getAllUsers();
         super.onCreate(savedInstanceState);
 

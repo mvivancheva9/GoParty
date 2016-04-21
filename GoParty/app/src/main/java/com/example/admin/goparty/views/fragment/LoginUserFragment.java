@@ -119,8 +119,6 @@ public class LoginUserFragment extends Fragment implements View.OnTouchListener 
 
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                //noinspection deprecation
-                linkForgottenPassword.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
                 return false;
             }
         });

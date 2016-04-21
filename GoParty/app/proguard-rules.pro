@@ -1,29 +1,19 @@
 -dontshrink
 -dontoptimize
 -dontpreverify
--verbose
 
 -dontwarn javax.management.**
 -dontwarn java.lang.management.**
--dontwarn org.apache.log4j.**
 -dontwarn org.apache.commons.logging.**
--dontwarn org.slf4j.**
--dontwarn org.json.**
 -dontwarn android.support.**
--dontwarn com.google.ads.**
-
+-dontwarn android.security.NetworkSecurityPolicy
 
 -keep public class * extends android.app.Activity
 -keep public class * extends android.app.Application
 -keep public class * extends android.app.Service
--keep public class * extends android.content.BroadcastReceiver
 -keep public class * extends android.content.ContentProvider
--keep public class * extends android.app.backup.BackupAgentHelper
--keep public class * extends android.preference.Preference
--keep public class com.android.vending.licensing.ILicensingService
 -keep class javax.** { *; }
 -keep class org.** { *; }
--keep class twitter4j.** { *; }
 
 -keepclasseswithmembernames class * {
     native <methods>;
@@ -37,17 +27,33 @@
     public <init>(android.content.Context, android.util.AttributeSet, int);
 }
 
--keepclassmembers enum * {
-    public static **[] values();
-    public static ** valueOf(java.lang.String);
+-keepclasseswithmembers class * {
+    void onClick*(...);
 }
 
+-keep class com.google.android.gms.common.GooglePlayServicesUtil {*;}
+-keep class com.google.android.gms.ads.identifier.AdvertisingIdClient {*;}
+-keep class com.google.android.gms.ads.identifier.AdvertisingIdClient$Info {*;}
 
--keep class * implements android.os.Parcelable {
-  public static final android.os.Parcelable$Creator *;
+-keep public class com.google.android.gms.common.internal.safeparcel.SafeParcelable {
+    public static final *** NULL;
 }
 
--keep class android.support.v4.app.** { *; }
--keep interface android.support.v4.app.** { *; }
--keep class com.actionbarsherlock.** { *; }
--keep interface com.actionbarsherlock.** { *; }
+-keep @interface com.google.android.gms.common.annotation.KeepName
+-keepnames @com.google.android.gms.common.annotation.KeepName class *
+-keepclassmembernames class * {
+    @com.google.android.gms.common.annotation.KeepName *;
+}
+
+-keepnames class * implements android.os.Parcelable {
+    public static final ** CREATOR;
+}
+
+-keep public class com.google.android.gms.flags.impl.FlagProviderImpl {
+  public <fields>; public <methods>;
+}
+
+-dump proguard/class_files.txt
+-printseeds proguard/seeds.txt
+-printusage proguard/unused.txt
+-printmapping proguard/mapping.txt

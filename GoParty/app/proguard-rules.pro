@@ -53,6 +53,14 @@
   public <fields>; public <methods>;
 }
 
+-keep class retrofit.** { *; }
+-keepclasseswithmembers class * {
+    @retrofit.** *;
+}
+-keepclassmembers class * {
+    @retrofit.** *;
+}
+
 -dump proguard/class_files.txt
 -printseeds proguard/seeds.txt
 -printusage proguard/unused.txt
